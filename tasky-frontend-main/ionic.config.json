@@ -1,0 +1,8 @@
+{
+  "name": "Tasky_Frontend",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue-vite",
+  "id": "e1c3fe6c"
+}

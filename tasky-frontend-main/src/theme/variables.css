@@ -1,0 +1,60 @@
+/* For information on how to create your own theme, please see:
+http://ionicframework.com/docs/theming/ */
+.background-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/public/fondo.png'); /* Replace with your image path */
+    background-repeat: es; /* Adjust as needed (repeat, space-around, etc.) */
+    background-size: cover; /* Adjust as needed (contain, auto, etc.) */
+    background-position: center; /* Adjust as needed (top, right, bottom-left, etc.) */
+  }
+  .logo-image-g {
+    position: relative;
+    z-index: 1;
+  }
+  .custom-button-width {
+      width: 300px; /* Adjust the width as needed */
+      margin: 0 auto;
+  }
+  .registro{
+      width: 150px; /* Adjust the width as needed */
+  }
+  .text {
+      display: flex; /* Enable Flexbox layout */
+    align-items: center; /* Vertically align content */
+    position: relative;
+    color: black; /* Sets text color to black */
+  }
+  .centered-content {
+    
+      display: flex; /* Enable Flexbox layout */
+      justify-content: center; /* Horizontally center content */
+      align-items: center; /* Vertically center content (optional) */
+  }
+  .logo-image {
+    width: 100px; /* Adjust width as desired */
+    height: auto; /* Maintain aspect ratio */
+    margin: 0 auto;
+  }
+  .imput {
+    /* Add padding to create space around the inputs */
+    margin: 3rem ; /* Add margin for spacing between inputs */   
+    font-size: 15px; /* Adjust font size as desired */
+    font-weight: bold; /* Apply bold style */
+    font-family: Arial, sans-serif; /* Set font family to Arial */
+    text-align: center; /* Center the text */ 
+    z-index: 1;
+  }
+  
+  .custom-rounded {
+    border-radius: 3rem; /* Adjust radius as desired */
+  }
+  .parafo {
+    font-size: 24px; /* Adjust font size as desired */
+    font-weight: bold; /* Apply bold style */
+    font-family: Arial, sans-serif; /* Set font family to Arial */
+    text-align: center; /* Center the text */
+  }
