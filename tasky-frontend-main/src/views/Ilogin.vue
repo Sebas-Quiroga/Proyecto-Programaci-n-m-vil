@@ -2,7 +2,7 @@
   <ion-page>
 
     <ion-content>
-      <div class="background-container"></div>    
+      <div class="background-container"></div>
       <BotonatrasComponent href="/home"> </BotonatrasComponent>
       <div
         style="display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative;">
@@ -31,8 +31,9 @@
         </div>
       </ion-card>
       <div class="custom-button-width">
-        <ButtonComponent id="login" value="login" fill="solid" color="medium" expand="block" size="large" href="/panel">
-        </ButtonComponent>
+        <ButtonComponent id="login" value="login" fill="solid" color="medium" expand="block" size="large" @click="validarCredenciales">
+</ButtonComponent>
+
       </div>
       <div class="centered-content">
         <th class="text">
@@ -51,8 +52,30 @@ import ButtonComponent from '@/components/ButtonComponent.vue';
 import ImputComponent from '@/components/ImputComponent.vue';
 import ImagenComponent from '@/components/ImagenComponent.vue';
 import BotonatrasComponent from '@/components/BotonatrasComponent.vue';
+import axios from 'axios';
 
+const validarCredenciales = async () => {
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('Password').value;
 
+  try {
+    const response = await axios.get(`http://localhost:9000/Tasky/api/Usuario/validar/${email}/${password}`);
+    
+    if (response.data) {
+      localStorage.setItem('emailUsuario', email); // Guardar el correo del usuario en el almacenamiento local
+      window.location.href = '/panel';
+    } else {
+      alert('Usuario o contraseña incorrecto');
+    }
+  } catch (error) {
+    console.error(error);
+    alert('Error al validar credenciales');
+  }
+}
+
+const redirigirAPanel = () => {
+  window.location.href = '/panel';
+}
 </script>
 
 
