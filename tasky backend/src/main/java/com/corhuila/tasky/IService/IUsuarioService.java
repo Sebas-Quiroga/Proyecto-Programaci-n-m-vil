@@ -13,5 +13,6 @@ public interface IUsuarioService {
     Usuario save(Usuario usuario); // Guarda un autor
     void update(Usuario usuario, Long id); // Actualiza un autor
     void delete(Long id); // Elimina un factura
-    Optional<IUsuarioDto> getValidar(String email, String password);
+    boolean getValidar(String email, String password);
+
 }

@@ -48,7 +48,6 @@ public class  UsuarioService implements IUsuarioService {
             usuarioUpdate.setApellido(usuario.getApellido());
             usuarioUpdate.setEmail(usuario.getEmail());
             usuarioUpdate.setPassword(usuario.getPassword());
-            usuarioUpdate.setRoles(usuario.getRoles());
 
             //Actualizar el objeto autor
             repository.save(usuarioUpdate);
@@ -63,7 +62,8 @@ public class  UsuarioService implements IUsuarioService {
     }
 
     @Override
-    public Optional<IUsuarioDto> getValidar(String  email, String password) {
-        return repository.getValidar(email,password);
+    public boolean getValidar(String email, String password) {
+        Optional<IUsuarioDto> usuarioOptional = repository.getValidar(email, password);
+        return usuarioOptional.isPresent();
     }
 }

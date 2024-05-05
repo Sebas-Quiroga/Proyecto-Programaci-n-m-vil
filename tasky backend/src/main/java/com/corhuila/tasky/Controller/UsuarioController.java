@@ -46,7 +46,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/validar/{email}/{password}")
-    public Optional<IUsuarioDto> getValidar(@PathVariable String email, @PathVariable String password){
+    public boolean getValidar(@PathVariable String email, @PathVariable String password){
         return service.getValidar(email, password);
     }
 }
