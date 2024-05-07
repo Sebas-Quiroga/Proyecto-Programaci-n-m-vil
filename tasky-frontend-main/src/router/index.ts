@@ -14,12 +14,17 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: '/login',
-    component: () => import('../views/Ilogin.vue')
+    component: () => import('../views/Login.vue')
   },
   {
     path: '/panel',
-    component: () => import('../views/panel.vue')
+    component: () => import('../views/Panel .vue')
+  },
+  {
+    path: '/prueba',
+    component: () => import('../views/prueba.vue')
   }
+
 ]
 
 const router = createRouter({

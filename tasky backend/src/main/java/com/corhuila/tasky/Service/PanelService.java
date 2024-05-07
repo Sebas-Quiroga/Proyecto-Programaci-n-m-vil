@@ -44,9 +44,7 @@ public class PanelService implements IPanelService {
         if (!ps.isEmpty()){
             Panel panelUpdate = ps.get();
             panelUpdate.setEvento(panel.getEvento());
-            panelUpdate.setIduser(panel.getIduser());
-            panelUpdate.setFecha_ini(panel.getFecha_ini());
-            panelUpdate.setFecha_fin(panel.getFecha_fin());
+
 
             //Actualizar el objeto libro
             repository.save(panelUpdate);

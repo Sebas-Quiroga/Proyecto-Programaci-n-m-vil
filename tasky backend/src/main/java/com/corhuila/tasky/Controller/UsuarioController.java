@@ -30,7 +30,7 @@ public class UsuarioController {
         return service.findById(id);
     }
 
-    @PostMapping()
+    @PostMapping("/registro")
     public Usuario save(@RequestBody Usuario usuario) {
         return service.save(usuario);
     }
