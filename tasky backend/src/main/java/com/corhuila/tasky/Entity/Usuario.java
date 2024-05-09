@@ -5,6 +5,9 @@ import lombok.Data;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+
 @Data
 @Entity
 @Table(name = "usuario")
@@ -26,6 +29,16 @@ public class Usuario {
     private String password;
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private Collection<Panel> paneles;
+
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "usuario_rol",
+            joinColumns = { @JoinColumn(name = "usuario_id") },
+            inverseJoinColumns = { @JoinColumn(name = "rol_id") }
+    )
+    private Set<Rol> roles = new HashSet<>();
+    // Métodos para manejar la relación entre usuario y roles
+
 
 
 }

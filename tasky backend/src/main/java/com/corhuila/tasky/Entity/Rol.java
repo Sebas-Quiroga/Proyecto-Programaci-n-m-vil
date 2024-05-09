@@ -3,6 +3,8 @@ package com.corhuila.tasky.Entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Data
@@ -31,6 +33,8 @@ public class Rol {
 		super();
 		this.nombre = nombre;
 	}
-
+	@ManyToMany(mappedBy = "roles")
+	private Set<Usuario> usuarios = new HashSet<>();
+	// Métodos para manejar la relación entre roles y usuarios
 	
 }
