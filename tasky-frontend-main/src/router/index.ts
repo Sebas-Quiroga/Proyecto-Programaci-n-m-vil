@@ -31,7 +31,7 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('@/views/Evento.vue')
       },
       {
-        path: 'PANEL',
+        path: 'panel',
         component: () => import('@/views/Panel.vue')
       },
       {

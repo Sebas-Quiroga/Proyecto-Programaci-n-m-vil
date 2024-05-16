@@ -75,20 +75,24 @@
 </template>
 
 <script setup lang="ts">
+import { IonPage, IonContent, IonSegment, IonSegmentButton, IonItem, IonLabel, IonInput } from '@ionic/vue';
+import ButtonComponent from '@/components/ButtonComponent.vue';
+import ImagenComponent from '@/components/ImagenComponent.vue';
+import ImputComponent from '@/components/ImputComponent.vue';
+import BotonatrasComponent from '@/components/BotonatrasComponent.vue';
+import axios from 'axios';
 import { ref } from 'vue';
 
 const selectedOption = ref('login');
+const nombre = ref('');
 const email = ref('');
 const password = ref('');
-const userEmail = ref('');
 
 const validarCredenciales = async () => {
   try {
     const response = await axios.get(`http://localhost:9000/Tasky/api/Usuario/validar/${email.value}/${password.value}`);
 
     if (response.data) {
-      // Guardar el email del usuario validado en userEmail
-      userEmail.value = email.value;
       window.location.href = '/Tasky/panel';
     } else {
       alert('Usuario o contraseña incorrecto');
@@ -108,8 +112,6 @@ const Registrar = async () => {
     });
 
     if (response.data) {
-      // Guardar el email del usuario registrado en userEmail
-      userEmail.value = email.value;
       alert('Usuario registrado exitosamente');
     } else {
       alert('Error al registrar el usuario');
