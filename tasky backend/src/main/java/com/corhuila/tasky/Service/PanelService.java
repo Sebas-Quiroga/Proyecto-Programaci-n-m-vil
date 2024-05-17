@@ -52,6 +52,9 @@ public class PanelService implements IPanelService {
             System.out.println("No existe el libro");
         }
     }
+    @Override public List<Panel> getPanelsByUsuarioId(int usuarioId) {
+        return repository.findByUsuarioId(usuarioId);
+    }
 
     @Override
     public void delete(int id) {

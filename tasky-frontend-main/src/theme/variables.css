@@ -10,6 +10,7 @@ http://ionicframework.com/docs/theming/ */
   background-repeat: es; /* Adjust as needed (repeat, space-around, etc.) */
   background-size: cover; /* Adjust as needed (contain, auto, etc.) */
   background-position: center; /* Adjust as needed (top, right, bottom-left, etc.) */
+  z-index: -1;
 }
 .logo-image-g {
   position: relative;
@@ -57,4 +58,7 @@ http://ionicframework.com/docs/theming/ */
   font-weight: bold; /* Apply bold style */
   font-family: Arial, sans-serif; /* Set font family to Arial */
   text-align: center; /* Center the text */
+}
+.adelante{
+  z-index: 1;
 }

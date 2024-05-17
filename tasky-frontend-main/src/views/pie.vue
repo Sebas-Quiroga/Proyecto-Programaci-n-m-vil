@@ -2,19 +2,19 @@
   <ion-page>
     <ion-tabs>
       <div class="background-container"></div>
-     <ion-header>
+      <ion-header>
         <ion-toolbar>
           <div style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
             <div style="display: flex; align-items: center;">
               <ion-icon name="person-circle-outline" size="large"></ion-icon>
               <div style="display: flex; flex-direction: column; align-items: start;">
-                <span style="margin-left: 10px;"> {{ nombre +'   ' +apellido }}</span>
+                <span style="margin-left: 10px;">{{ nombre + ' ' + apellido }}</span>
                 <span style="margin-left: 10px;">{{ email }}</span>
               </div>
             </div>
             <div style="display: flex; align-items: center;">
-              <ion-button color="light" fill="clear" size="large" >
-                <ion-icon name="power" size="large" ></ion-icon>
+              <ion-button color="light" fill="clear" size="large">
+                <ion-icon name="power" size="large"></ion-icon>
               </ion-button>
             </div>
           </div>
@@ -55,6 +55,7 @@ import axios from 'axios';
 const nombre = ref(''); // Asegúrate de que nombre, apellido y email estén disponibles en este ámbito
 const apellido = ref('');
 const email = ref('');
+const id = ref('');
 
 const logout = () => {
   // Lógica para cerrar sesión
@@ -71,6 +72,7 @@ const consultarUsuario = async () => {
       nombre.value = usuario.nombre;
       apellido.value = usuario.apellido;
       email.value = usuario.email;
+      id.value = usuario.id;
 
     } else {
       console.error('Usuario no encontrado');

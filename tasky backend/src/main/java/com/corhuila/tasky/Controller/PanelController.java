@@ -42,4 +42,9 @@ public class PanelController {
     public void delete(@PathVariable int id) {
         service.delete(id);
     }
+
+    @GetMapping("/usuario/{usuarioId}")
+    public List<Panel> getPanelsByUsuarioId(@PathVariable int usuarioId) {
+        return service.getPanelsByUsuarioId(usuarioId);
+    }
 }
