@@ -41,68 +41,108 @@ import ButtonComponent from '@/components/ButtonComponent.vue';
 import ImputComponent from '@/components/ImputComponent.vue';
 import { IonPage, IonContent, IonItem, IonLabel, IonInput, IonButton } from '@ionic/vue';
 import { defineComponent, ref } from 'vue';
+import axios from 'axios';
 
 export default defineComponent({
   components: {
     IonPage,
     IonContent,
+    IonCard,
+    IonCardContent,
+    IonButton,
+    IonIcon,
     IonItem,
     IonLabel,
     IonInput,
-    IonButton,
-    ButtonComponent,
-    ImputComponent
+    IonDatetime
   },
   data() {
     return {
+      panels: [],
       nuevoPanel: {
-        name: '',
-        ini: '',
-        fin: '',
-        evento: 0, // Valor predeterminado del evento es 0
-        usuario_id: '' // Variable para almacenar el ID del usuario logueado
-      }
+        nameOfTask: '',
+        fechaIni: '',
+        fechaFin: ''
+      },
+      usuarioId: null
     };
   },
-  computed: {
-    usuarioId() {
-      // Aquí debes acceder al ID del usuario logueado en tu lógica de autenticación
-      // y devolverlo como el ID del usuario actualmente logueado
-      return 'ID_DEL_USUARIO_LOGUEADO';
-    }
+  mounted() {
+    this.consultarUsuario();
   },
   methods: {
-    agregarPanel() {
-      fetch('http://localhost:9000/Tasky/api/Panel/crear', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(this.nuevoPanel)
-      })
+    consultarUsuario() {
+      const emailGuardado = localStorage.getItem('emailUsuario');
+      axios.get(`http://localhost:9000/Tasky/api/Usuario?email=${emailGuardado}`)
         .then(response => {
-          if (!response.ok) {
-            throw new Error('No se pudo crear el nuevo panel.');
+          if (response.data.length > 0) {
+            const usuario = response.data[0];
+            this.usuarioId = usuario.id;
+            this.fetchPanels();
+          } else {
+            console.error('Usuario no encontrado');
           }
-          return response.json();
-        })
-        .then(data => {
-          console.log('Nuevo Panel creado:', data);
-          this.nuevoPanel = {
-            name: '',
-            ini: '',
-            fin: '',
-            evento: 0, // Restablecer el valor del evento a 0 después de crear el panel
-            
-          };
-          window.location.href = '/Tasky/panel'; // Redirigir a la página /Tasky/panel
-          
         })
         .catch(error => {
           console.error(error);
-          alert('Hubo un problema al crear el nuevo panel.');
+        });
+    },
+    fetchPanels() {
+      axios.get(`http://localhost:9000/Tasky/api/Panel/usuario/${this.usuarioId}`)
+        .then(response => {
+          this.panels = response.data.filter(panel => panel.evento === 0);
+          console.log('Datos de los paneles filtrados:', this.panels);
+        })
+        .catch(error => {
+          console.error('Hubo un problema al obtener los datos de la API.', error);
+        });
+    },
+    changeEventToZero(panelId) {
+      const panel = this.panels.find(p => p.id === panelId);
+      if (panel) {
+        panel.evento = 1;
+        axios.put(`http://localhost:9000/Tasky/api/Panel/${panelId}`, panel)
+          .then(response => {
+            console.log(`Evento del Panel ID ${panelId} cambiado a ${panel.evento}`);
+            this.fetchPanels();
+          })
+          .catch(error => {
+            console.error(`Hubo un problema al actualizar el evento del Panel ID ${panelId} en la API.`, error);
+          });
+      }
+    },
+    agregarPanel() {
+      const nuevoPanelConUsuario = { 
+        ...this.nuevoPanel, 
+        usuario: { id: this.usuarioId },
+        evento: 0 // Inicializa el evento a 0
+      };
+      axios.post('http://localhost:9000/Tasky/api/Panel', nuevoPanelConUsuario)
+        .then(response => {
+          console.log('Panel agregado:', response.data);
+          this.nuevoPanel.nameOfTask = '';
+          this.nuevoPanel.fechaIni = '';
+          this.nuevoPanel.fechaFin = '';
+          this.fetchPanels();
+        })
+        .catch(error => {
+          console.error('Hubo un problema al agregar el nuevo panel.', error);
         });
     }
   }
 });
 </script>
+<style scoped>
+.header-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0;
+  }
+  
+  h2 {
+    text-align: center;
+    margin: 0;
+    font-size: 24px;
+  }
+</style>

@@ -1,86 +1,50 @@
 <template>
   <ion-page>
-    <div class="background-container"></div>
     <ion-content>
-      <h2>Agregar Nuevo Panel</h2>
-      <form @submit.prevent="agregarPanel">
-        <ion-item>
-          <ion-label>Nombre:</ion-label>
-          <ion-input v-model="nuevoPanel.name" required></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label>Fecha de Inicio:</ion-label>
-          <ion-input type="date" v-model="nuevoPanel.ini" required></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label>Fecha de Fin:</ion-label>
-          <ion-input type="date" v-model="nuevoPanel.fin" required></ion-input>
-        </ion-item>
-        <ion-button type="submit">Agregar</ion-button>
-      </form>
+      <ion-card v-for="panel in panels" :key="panel.id" class="custom-rounded">
+        <ion-card-header>
+          <ion-card-title>Panel ID: {{ panel.id }}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-text>Nombre: {{ panel.name }}</ion-text>
+          <ion-text>Fecha de Inicio: {{ panel.ini }}</ion-text>
+          <ion-text>Fecha de Fin: {{ panel.fin }}</ion-text>
+          <ion-text>Evento: {{ panel.evento }}</ion-text>
+          <ion-button @click="changeEventToZero(panel.id)">
+            <ion-icon name="checkmark-circle" size="large"></ion-icon>
+          </ion-button>
+        </ion-card-content>
+      </ion-card>
     </ion-content>
   </ion-page>
 </template>
+
 <script>
-import { IonPage, IonContent, IonItem, IonLabel, IonInput, IonButton } from '@ionic/vue';
-import { defineComponent, ref } from 'vue';
+import { IonPage, IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonText, IonButton, IonIcon } from '@ionic/vue';
+import { defineComponent } from 'vue';
 import axios from 'axios';
 
 export default defineComponent({
   components: {
     IonPage,
     IonContent,
-    IonItem,
-    IonLabel,
-    IonInput,
-    IonButton
+    IonCard,
+    IonCardHeader,
+    IonCardTitle,
+    IonCardContent,
+    IonText,
+    IonButton,
+    IonIcon
   },
   data() {
     return {
-      nuevoPanel: {
-        name: '',
-        ini: '',
-        fin: '',
-        evento: 0, // Valor predeterminado del evento es 0
-        usuario: idUsuario // Campo para el id_usuario
-      }
+      panels: []
     };
   },
   mounted() {
     this.consultarUsuario();
   },
   methods: {
-    agregarPanel() {
-  const usuarioId = localStorage.getItem('idUsuario');
-  this.nuevoPanel.usuario_id = usuarioId; // Asignar el valor de usuarioId a usuario_id
-  fetch('http://localhost:9000/Tasky/api/Panel/crear', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(this.nuevoPanel)
-  })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('No se pudo crear el nuevo panel.');
-      }
-      return response.json();
-    })
-    .then(data => {
-      console.log('Nuevo Panel creado:', data);
-      this.nuevoPanel = {
-        name: '',
-        ini: '',
-        fin: '',
-        evento: 0, // Restablecer el valor del evento a 0 después de crear el panel
-        usuario_id: usuarioId // Restablecer el valor del usuario_id a null después de crear el panel
-      };
-    })
-    .catch(error => {
-      console.error(error);
-      alert('Hubo un problema al crear el nuevo panel.');
-    });
-},
     consultarUsuario() {
       const emailGuardado = localStorage.getItem('emailUsuario');
       axios.get(`http://localhost:9000/Tasky/api/Usuario?email=${emailGuardado}`)
@@ -88,7 +52,7 @@ export default defineComponent({
           if (response.data.length > 0) {
             const usuario = response.data[0];
             const idUsuario = usuario.id;
-            this.nuevoPanel.usuario = idUsuario; // Asignar el idUsuario al campo "usuario" de nuevoPanel
+            this.mostrarPaneles(idUsuario);
           } else {
             console.error('Usuario no encontrado');
           }
@@ -96,6 +60,37 @@ export default defineComponent({
         .catch(error => {
           console.error(error);
         });
+    },
+    mostrarPaneles(idUsuario) {
+      axios.get(`http://localhost:9000/Tasky/api/Panel/vista/${idUsuario}`)
+        .then(response => {
+          this.panels = response.data.filter(panel => panel.evento === 0);
+          console.log('Datos de los paneles filtrados:', this.panels);
+        })
+        .catch(error => {
+          console.error(error);
+          alert('Hubo un problema al obtener los datos de la API.');
+        });
+    },
+    changeEventToZero(panelId) {
+      const panel = this.panels.find(p => p.id === panelId);
+      if (panel) {
+        // Actualizar el evento localmente
+        panel.evento = 1;
+
+        // Realizar la solicitud PUT a la API para actualizar el evento en la base de datos
+        axios.put(`http://localhost:9000/Tasky/api/Panel/tareas/${panelId}`, { evento: 1 })
+          .then(response => {
+            console.log(`Evento del Panel ID ${panelId} actualizado a 1 en la base de datos`);
+            window.location.reload();
+          })
+          .catch(error => {
+            console.error('Error al actualizar el evento en la base de datos:', error);
+            // Revertir el cambio si hay un error
+            panel.evento = 0;
+            alert('Hubo un problema al actualizar el evento en la base de datos.');
+          });
+      }
     }
   }
 });
