@@ -24,21 +24,22 @@
       <ion-tab-bar slot="bottom">
         <ion-tab-button tab="Buscar" href="/Tasky/realizado">
           <ion-icon aria-hidden="true" :icon="triangle" />
-          <ion-button color="light" fill="clear" size="large">
+          <ion-button color="light"  size="large">
             <ion-icon name="checkmark-circle" size="large"></ion-icon>
           </ion-button>
         </ion-tab-button>
         <ion-tab-button tab="Buscar" href="">
           <ion-icon aria-hidden="true" :icon="triangle" />
-          <ion-button color="light" fill="clear" size="large">
+          <ion-button color="light" size="large">
             <ion-icon name="search-circle" size="large"></ion-icon>
           </ion-button>
         </ion-tab-button>
 
-        <ion-tab-button tab="agregar" href="/Tasky/evento">
+        <ion-tab-button tab="agregar" href="/Tasky/notas">
           <ion-icon aria-hidden="true" :icon="square" />
-          <ion-button color="light" fill="clear" size="large">
-            <ion-icon name="add-circle" size="large"></ion-icon>
+          <ion-button color="light"  size="large">
+            
+            <ion-icon name="file-tray-outline" size="large"></ion-icon>
           </ion-button>
         </ion-tab-button>
       </ion-tab-bar>

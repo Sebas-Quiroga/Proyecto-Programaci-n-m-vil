@@ -2,19 +2,25 @@
   <ion-page>
     <ion-content>
       <ion-card v-for="panel in panels" :key="panel.id" class="custom-rounded">
-        <ion-card-header>
-          <ion-card-title>Panel ID: {{ panel.id }}</ion-card-title>
-        </ion-card-header>
+       
         <ion-card-content>
-          <ion-text>Nombre: {{ panel.name }}</ion-text>
-          <ion-text>Fecha de Inicio: {{ panel.ini }}</ion-text>
-          <ion-text>Fecha de Fin: {{ panel.fin }}</ion-text>
-          <ion-text>Evento: {{ panel.evento }}</ion-text>
-          <ion-button @click="changeEventToZero(panel.id)">
+          <ion-item>
+            <ion-text>Nombre: {{ panel.name }}</ion-text>
+          </ion-item>
+          <ion-item>
+            <ion-text>Fecha de Inicio: {{ panel.ini }}</ion-text>
+          </ion-item>
+          <ion-item>
+            <ion-text>Fecha de Fin: {{ panel.fin }}</ion-text>
+          </ion-item>
+          <ion-button @click="changeEventToZero(panel.id)" fill="clear">
             <ion-icon name="checkmark-circle" size="large"></ion-icon>
           </ion-button>
         </ion-card-content>
       </ion-card>
+      <ion-button color="light" size="large"  href="/Tasky/evento">
+            <ion-icon name="add-circle" size="large" ></ion-icon>
+          </ion-button>
     </ion-content>
   </ion-page>
 </template>
