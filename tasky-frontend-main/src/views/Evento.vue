@@ -17,19 +17,11 @@
             <ion-label>Fecha de Fin:</ion-label>
             <ion-input type="date" v-model="nuevoPanel.fin" required></ion-input>
           </ion-item>
-          <ion-input type="hidden" v-model="nuevoPanel.usuario_id" :value="usuarioId" />
-          <ButtonComponent
-            id="Crear"
-            value="crear"
-            fill="solid"
-            color="warning"
-            expand="block"
-            size="large"
-            class="custom-button-width"
-            @click="agregarPanel"
-          >
+          <ion-input type="hidden" v-model="nuevoPanel.usuario_id" :value="this.idUsuario" />
+          <ButtonComponent id="Crear" value="crear" fill="solid" color="warning" expand="block" size="large"
+            class="custom-button-width" @click="agregarPanel">
           </ButtonComponent>
-         
+
         </form>
       </ion-card>
     </ion-content>
@@ -41,6 +33,7 @@ import ButtonComponent from '@/components/ButtonComponent.vue';
 import ImputComponent from '@/components/ImputComponent.vue';
 import { IonPage, IonContent, IonItem, IonLabel, IonInput, IonButton } from '@ionic/vue';
 import { defineComponent, ref } from 'vue';
+import axios from 'axios';
 
 export default defineComponent({
   components: {
@@ -59,44 +52,45 @@ export default defineComponent({
         name: '',
         ini: '',
         fin: '',
-        evento: 0, // Valor predeterminado del evento es 0
-        usuario_id: '' // Variable para almacenar el ID del usuario logueado
-      }
+        evento: 0,
+        usuario_id: '', // Valor predeterminado del evento es 0
+      },
+      idUsuario: ''
     };
   },
-  computed: {
-    usuarioId() {
-      // Aquí debes acceder al ID del usuario logueado en tu lógica de autenticación
-      // y devolverlo como el ID del usuario actualmente logueado
-      return 'ID_DEL_USUARIO_LOGUEADO';
-    }
+  mounted() {
+    this.consultarUsuario();
   },
   methods: {
-    agregarPanel() {
-      fetch('http://localhost:9000/Tasky/api/Panel/crear', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(this.nuevoPanel)
-      })
+    consultarUsuario() {
+      const emailGuardado = localStorage.getItem('emailUsuario');
+      axios.get(`http://localhost:9000/Tasky/api/Usuario?email=${emailGuardado}`)
         .then(response => {
-          if (!response.ok) {
-            throw new Error('No se pudo crear el nuevo panel.');
+          if (response.data.length > 0) {
+            const usuario = response.data[0];
+            this.idUsuario = usuario.id;
+            console.log('El ID del usuario que vas a usar es:', this.idUsuario);
+            alert(`El ID del usuario que vas a usar es: ${this.idUsuario}`);
+          } else {
+            console.error('Usuario no encontrado');
           }
-          return response.json();
         })
-        .then(data => {
-          console.log('Nuevo Panel creado:', data);
+        .catch(error => {
+          console.error(error);
+        });
+    },
+    agregarPanel() {
+      axios.post('http://localhost:9000/Tasky/api/Panel/crear', this.nuevoPanel)
+        .then(response => {
+          console.log('Nuevo Panel creado:', response.data);
           this.nuevoPanel = {
             name: '',
             ini: '',
             fin: '',
-            evento: 0, // Restablecer el valor del evento a 0 después de crear el panel
-            
+            evento: 0,
+            usuario_id: this.idUsuario,
           };
-          window.location.href = '/Tasky/panel'; // Redirigir a la página /Tasky/panel
-          
+          window.location.href = '/Tasky/panel';
         })
         .catch(error => {
           console.error(error);

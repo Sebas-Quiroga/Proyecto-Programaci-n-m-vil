@@ -83,7 +83,6 @@ export default defineComponent({
       if (panel) {
         // Actualizar el evento localmente
         panel.evento = 1;
-
         // Realizar la solicitud PUT a la API para actualizar el evento en la base de datos
         axios.put(`http://localhost:9000/Tasky/api/Panel/tareas/${panelId}`, { evento: 1 })
           .then(response => {
