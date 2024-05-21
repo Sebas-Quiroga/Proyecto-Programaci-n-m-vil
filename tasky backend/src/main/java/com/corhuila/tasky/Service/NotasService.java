@@ -1,9 +1,10 @@
 package com.corhuila.tasky.Service;
 
 
+import com.corhuila.tasky.Entity.Notas;
 import com.corhuila.tasky.Entity.Tareas;
-import com.corhuila.tasky.IRepository.ITareasRepository;
-import com.corhuila.tasky.IService.ITareasService;
+import com.corhuila.tasky.IRepository.INotasRepository;
+import com.corhuila.tasky.IService.INotasService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,39 +12,39 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class TareasService implements ITareasService {
+public class NotasService implements INotasService {
 
     //Conectar con los datos - IRepository
     // Inyección de dependencia
     @Autowired
-    private ITareasRepository repository;
+    private INotasRepository repository;
 
 
     @Override
-    public List<Tareas> findAll() {
+    public List<Notas> findAll() {
        return repository.findAll();
     }
 
     @Override
-    public Optional<Tareas> findById(long id) {
+    public Optional<Notas> findById(int id) {
         return repository.findById(id);
     }
 
     @Override
-    public Tareas save(Tareas libro) {
-        return repository.save(libro);
+    public Notas save(Notas notas) {
+        return repository.save(notas);
     }
 
     @Override
-    public void update(Tareas tareas, long id) {
+    public void update(Notas notas, int id) {
         //Obtener el objeto libro y el id
         //Verificar con el id, si exiten los datos
-        Optional<Tareas> ps = repository.findById(id);
+        Optional<Notas> ps = repository.findById(id);
 
         //Cargar nuevo objeto
         if (!ps.isEmpty()){
-            Tareas tareasUpdate = ps.get();
-            tareasUpdate.setEvento(tareas.getEvento());
+            Notas tareasUpdate = ps.get();
+            tareasUpdate.setEvento(notas.getEvento());
 
 
             //Actualizar el objeto libro
@@ -53,13 +54,13 @@ public class TareasService implements ITareasService {
         }
     }
 
-
     @Override
-    public void delete(long id) {
+    public void delete(int id) {
         repository.deleteById(id);
     }
 
-    @Override public List<Tareas> getPanelsByUsuarioId(int usuarioId) {
-        return repository.findByUsuarioId(usuarioId);
+    @Override
+    public List<Tareas> getNotassByUsuarioId(int usuarioIde) {
+        return repository.findByUsuarioId(usuarioIde);
     }
 }

@@ -1,8 +1,8 @@
 package com.corhuila.tasky.Entity;
-
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDate;
 
 @Data
 @Entity
@@ -10,13 +10,22 @@ import lombok.Data;
 public class Tareas {
 
     @Id
-    private int id;
-    private int id_panel; //llave foranea de panel
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
-    private String notas;
+    @Column(name = "name")
+    private String name;
 
-    @OneToOne // metodo llave foranea
-    @JoinColumn(name = "id_panel", referencedColumnName = "id", insertable = false, updatable = false)
-    private Panel panel; // Relación con la tabla Panel
+    @Column(name = "ini")
+    private LocalDate ini;
+
+    @Column(name = "fin")
+    private LocalDate fin;
+
+    @Column(name = "evento")
+    private byte evento;
+    @ManyToOne
+    @JoinColumn(name = "usuario_id", referencedColumnName = "id")
+    private Usuario usuario; // Relación de clave externa con la entidad Usuario
 
 }

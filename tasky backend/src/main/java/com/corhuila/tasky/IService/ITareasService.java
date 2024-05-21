@@ -8,8 +8,9 @@ import java.util.Optional;
 
 public interface ITareasService {
     List<Tareas> findAll(); // Devuelve una lista de clientes
-    Optional<Tareas> findById(int id); // Devuelve un cliente por su id
-    Tareas save(Tareas tareas); // Guarda un libro
-    void update(Tareas tareas, int id); // Actualiza un libro
-    void delete(int id); // Elimina un cliente
+    Optional<Tareas> findById(long id); // Devuelve un cliente por su id
+    Tareas save(Tareas tareas); // Guarda un tareas
+    void update(Tareas tareas, long id); // Actualiza un libro
+    void delete(long id);
+    List<Tareas> getPanelsByUsuarioId(int usuarioId);
 }

@@ -1,77 +1,97 @@
 <template>
   <ion-page>
-    <ion-header>
-      <ion-toolbar>
-        <ion-title>Consumir API de Panel en Vue-Ionic</ion-title>
-      </ion-toolbar>
-    </ion-header>
     <ion-content>
-      <div id="panelContainer"></div>
+      <ion-card v-for="panel in panels" :key="panel.id" class="custom-rounded">
+        <ion-card-header>
+          <ion-card-title>Panel ID: {{ panel.id }}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-text>Nombre: {{ panel.name }}</ion-text>
+          <ion-text>Fecha de Inicio: {{ panel.ini }}</ion-text>
+          <ion-text>Fecha de Fin: {{ panel.fin }}</ion-text>
+          <ion-text>Evento: {{ panel.evento }}</ion-text>
+          <ion-button @click="changeEventToZero(panel.id)">
+            <ion-icon name="checkmark-circle" size="large"></ion-icon>
+          </ion-button>
+        </ion-card-content>
+      </ion-card>
     </ion-content>
   </ion-page>
 </template>
 
 <script>
-export default {
-  name: 'PanelPage',
+import { IonPage, IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonText, IonButton, IonIcon } from '@ionic/vue';
+import { defineComponent } from 'vue';
+import axios from 'axios';
+
+export default defineComponent({
+  components: {
+    IonPage,
+    IonContent,
+    IonCard,
+    IonCardHeader,
+    IonCardTitle,
+    IonCardContent,
+    IonText,
+    IonButton,
+    IonIcon
+  },
+  data() {
+    return {
+      panels: []
+    };
+  },
   mounted() {
-    const panelContainer = document.getElementById('panelContainer');
-
-    function mostrarPaneles(idUsuario) {
-      fetch(`http://localhost:9000/Tasky/api/Panel/vista/${idUsuario}`)
+    this.consultarUsuario();
+  },
+  methods: {
+    consultarUsuario() {
+      const emailGuardado = localStorage.getItem('emailUsuario');
+      axios.get(`http://localhost:9000/Tasky/api/Usuario?email=${emailGuardado}`)
         .then(response => {
-          if (!response.ok) {
-            throw new Error('No se pudieron obtener los datos de la API.');
+          if (response.data.length > 0) {
+            const usuario = response.data[0];
+            const idUsuario = usuario.id;
+            this.mostrarPaneles(idUsuario);
+          } else {
+            console.error('Usuario no encontrado');
           }
-          return response.json();
         })
-        .then(data => {
-          panelContainer.innerHTML = '';
-          data.forEach(panel => {
-            const card = document.createElement('ion-card');
-
-            const cardContent = document.createElement('ion-card-content');
-
-            const title = document.createElement('ion-card-title');
-            title.textContent = `Panel ID: ${panel.id}`;
-
-            const name = document.createElement('p');
-            name.textContent = `Nombre: ${panel.name}`;
-
-            const ini = document.createElement('p');
-            ini.textContent = `Fecha de Inicio: ${panel.ini}`;
-
-            const fin = document.createElement('p');
-            fin.textContent = `Fecha de Fin: ${panel.fin}`;
-
-            const evento = document.createElement('p');
-            evento.textContent = `Evento: ${panel.evento}`;
-
-            cardContent.appendChild(title);
-            cardContent.appendChild(name);
-            cardContent.appendChild(ini);
-            cardContent.appendChild(fin);
-            cardContent.appendChild(evento);
-
-            card.appendChild(cardContent);
-
-            panelContainer.appendChild(card);
-
-            console.log('Datos del Panel:', panel);
-          });
+        .catch(error => {
+          console.error(error);
+        });
+    },
+    mostrarPaneles(idUsuario) {
+      axios.get(`localhost:9000/Tasky/api/Tareas/vista/notas/${idUsuario}`)
+        .then(response => {
+          this.panels = response.data.filter(panel => panel.evento === 0);
+          console.log('Datos de los paneles filtrados:', this.panels);
         })
         .catch(error => {
           console.error(error);
           alert('Hubo un problema al obtener los datos de la API.');
         });
-    }
+    },
+    changeEventToZero(panelId) {
+      const panel = this.panels.find(p => p.id === panelId);
+      if (panel) {
+        // Actualizar el evento localmente
+        panel.evento = 1;
 
-    const idUsuario = prompt('Por favor, ingresa tu ID de usuario:');
-    if (idUsuario) {
-      mostrarPaneles(idUsuario);
-    } else {
-      alert('Debes ingresar un ID de usuario para ver los paneles.');
+        // Realizar la solicitud PUT a la API para actualizar el evento en la base de datos
+        axios.put(`http://localhost:9000/Tasky/api/Tareas${panelId}`, { evento: 1 })
+          .then(response => {
+            console.log(`Evento del Panel ID ${panelId} actualizado a 1 en la base de datos`);
+            window.location.reload();
+          })
+          .catch(error => {
+            console.error('Error al actualizar el evento en la base de datos:', error);
+            // Revertir el cambio si hay un error
+            panel.evento = 0;
+            alert('Hubo un problema al actualizar el evento en la base de datos.');
+          });
+      }
     }
   }
-}
+});
 </script>

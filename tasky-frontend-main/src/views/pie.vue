@@ -75,6 +75,9 @@ const consultarUsuario = async () => {
       email.value = usuario.email;
       id.value = usuario.id;
 
+      // Guardar el ID del usuario en otra variable local
+      const idUsuario = usuario.id;
+      localStorage.setItem('idUsuario', idUsuario);
     } else {
       console.error('Usuario no encontrado');
     }
