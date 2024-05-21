@@ -25,7 +25,7 @@ public class Tareas {
     @Column(name = "evento")
     private byte evento;
     @ManyToOne
-    @JoinColumn(name = "usuario_id", referencedColumnName = "id")
+    @JoinColumn(name = "usuario", referencedColumnName = "id")
     private Usuario usuario; // Relación de clave externa con la entidad Usuario
 
 }

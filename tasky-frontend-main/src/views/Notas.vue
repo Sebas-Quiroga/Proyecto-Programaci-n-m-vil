@@ -2,19 +2,25 @@
   <ion-page>
     <ion-content>
       <ion-card v-for="panel in panels" :key="panel.id" class="custom-rounded">
-        <ion-card-header>
-          <ion-card-title>Panel ID: {{ panel.id }}</ion-card-title>
-        </ion-card-header>
+
         <ion-card-content>
-          <ion-text>Nombre: {{ panel.name }}</ion-text>
-          <ion-text>Fecha de Inicio: {{ panel.ini }}</ion-text>
-          <ion-text>Fecha de Fin: {{ panel.fin }}</ion-text>
-          <ion-text>Evento: {{ panel.evento }}</ion-text>
-          <ion-button @click="changeEventToZero(panel.id)">
+          <ion-item>
+            <ion-text>Nombre: {{ panel.name }}</ion-text>
+          </ion-item>
+          <ion-item>
+            <ion-text>Fecha de Inicio: {{ panel.ini }}</ion-text>
+          </ion-item>
+          <ion-item>
+            <ion-text>Fecha de Fin: {{ panel.fin }}</ion-text>
+          </ion-item>
+          <ion-button @click="changeEventToZero(panel.id)" fill="clear">
             <ion-icon name="checkmark-circle" size="large"></ion-icon>
           </ion-button>
         </ion-card-content>
       </ion-card>
+      <ion-button color="light" size="large" class="ion-float" href="/Tasky/notas/guardar">
+        <ion-icon name="add-circle" size="large"></ion-icon>
+      </ion-button>
     </ion-content>
   </ion-page>
 </template>
@@ -62,7 +68,7 @@ export default defineComponent({
         });
     },
     mostrarPaneles(idUsuario) {
-      axios.get(`localhost:9000/Tasky/api/Tareas/vista/notas/${idUsuario}`)
+      axios.get(`http://localhost:9000/Tasky/api/Tareas/vista`)
         .then(response => {
           this.panels = response.data.filter(panel => panel.evento === 0);
           console.log('Datos de los paneles filtrados:', this.panels);
@@ -77,9 +83,8 @@ export default defineComponent({
       if (panel) {
         // Actualizar el evento localmente
         panel.evento = 1;
-
         // Realizar la solicitud PUT a la API para actualizar el evento en la base de datos
-        axios.put(`http://localhost:9000/Tasky/api/Tareas${panelId}`, { evento: 1 })
+        axios.put(`http://localhost:9000/Tasky/api/Panel/tareas/${panelId}`, { evento: 1 })
           .then(response => {
             console.log(`Evento del Panel ID ${panelId} actualizado a 1 en la base de datos`);
             window.location.reload();
@@ -95,3 +100,10 @@ export default defineComponent({
   }
 });
 </script>
+<style>
+.ion-float {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+}</style>

@@ -93,7 +93,7 @@ const validarCredenciales = async () => {
     const response = await axios.get(`http://localhost:9000/Tasky/api/Usuario/validar/${email.value}/${password.value}`);
 
     if (response.data) {
-      window.location.href = '/Tasky/panel';
+      window.location.href = '/Tasky/Tareas';
     } else {
       alert('Usuario o contraseña incorrecto');
     }

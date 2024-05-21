@@ -27,12 +27,12 @@ const routes: Array<RouteRecordRaw> = [
         redirect: '/tasky/login'
       },
       {
-        path: 'evento',
-        component: () => import('@/views/Evento.vue')
+        path: 'tareas/guardar',
+        component: () => import('@/views/Guardar_tarea.vue')
       },
       {
-        path: 'panel',
-        component: () => import('@/views/Panel.vue')
+        path: 'Tareas',
+        component: () => import('@/views/Tareas.vue')
       },
       {
         path: 'realizado',
@@ -41,6 +41,11 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: 'notas',
         component: () => import('@/views/Notas.vue')
+      }
+      ,
+      {
+        path: 'notas/guardar',
+        component: () => import('@/views/Guardar_nota.vue')
       }
     ]
   }

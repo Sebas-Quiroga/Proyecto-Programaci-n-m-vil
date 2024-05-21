@@ -28,7 +28,7 @@
             <ion-icon name="checkmark-circle" size="large"></ion-icon>
           </ion-button>
         </ion-tab-button>
-        <ion-tab-button tab="Buscar" href="/Tasky/panel">
+        <ion-tab-button tab="Buscar" href="/Tasky/Tareas">
           <ion-icon aria-hidden="true" :icon="triangle" />
           <ion-button color="light" size="large">
             <ion-icon name="calendar-number-outline" size="large"></ion-icon>

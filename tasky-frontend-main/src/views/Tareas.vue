@@ -2,7 +2,7 @@
   <ion-page>
     <ion-content>
       <ion-card v-for="panel in panels" :key="panel.id" class="custom-rounded">
-       
+
         <ion-card-content>
           <ion-item>
             <ion-text>Nombre: {{ panel.name }}</ion-text>
@@ -18,9 +18,9 @@
           </ion-button>
         </ion-card-content>
       </ion-card>
-      <ion-button color="light" size="large"  href="/Tasky/evento">
-            <ion-icon name="add-circle" size="large" ></ion-icon>
-          </ion-button>
+      <ion-button color="light" size="large" class="ion-float" href="/Tasky/tareas/guardar">
+        <ion-icon name="add-circle" size="large"></ion-icon>
+      </ion-button>
     </ion-content>
   </ion-page>
 </template>
@@ -100,3 +100,10 @@ export default defineComponent({
   }
 });
 </script>
+<style>
+.ion-float {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+}</style>
