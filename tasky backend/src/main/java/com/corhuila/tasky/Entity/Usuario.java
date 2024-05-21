@@ -27,8 +27,7 @@ public class Usuario {
 
     @Column(name ="password")
     private String password;
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
-    private Collection<Panel> paneles;
+
 
     @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(

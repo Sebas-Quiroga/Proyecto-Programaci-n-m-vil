@@ -11,24 +11,21 @@ public class Panel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
-    @ManyToOne
-    @JoinColumn(name = "iduser")
-    private Usuario usuario;
+    @Column(name = "name")
+    private String name;
 
-    @Column(name = "name_of_task")
-    private String nameOfTask;
+    @Column(name = "ini")
+    private LocalDate ini;
 
-    @Column(name = "fecha_ini")
-    private LocalDate fechaIni;
-
-    @Column(name = "fecha_fin")
-    private LocalDate fechaFin;
+    @Column(name = "fin")
+    private LocalDate fin;
 
     @Column(name = "evento")
     private byte evento;
+    @ManyToOne
+    @JoinColumn(name = "usuario_id", referencedColumnName = "id")
+    private Usuario usuario; // Relación de clave externa con la entidad Usuario
 
-    @OneToOne(mappedBy = "panel", cascade = CascadeType.ALL)
-    private Tareas tareas;
 }

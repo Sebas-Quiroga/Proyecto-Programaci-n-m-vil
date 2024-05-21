@@ -25,7 +25,7 @@ public class PanelService implements IPanelService {
     }
 
     @Override
-    public Optional<Panel> findById(int id) {
+    public Optional<Panel> findById(long id) {
         return repository.findById(id);
     }
 
@@ -35,7 +35,7 @@ public class PanelService implements IPanelService {
     }
 
     @Override
-    public void update(Panel panel, int id) {
+    public void update(Panel panel, long id) {
         //Obtener el objeto libro y el id
         //Verificar con el id, si exiten los datos
         Optional<Panel> ps = repository.findById(id);
@@ -52,12 +52,10 @@ public class PanelService implements IPanelService {
             System.out.println("No existe el libro");
         }
     }
-    @Override public List<Panel> getPanelsByUsuarioId(int usuarioId) {
-        return repository.findByUsuarioId(usuarioId);
-    }
+
 
     @Override
-    public void delete(int id) {
+    public void delete(long id) {
         repository.deleteById(id);
     }
 }

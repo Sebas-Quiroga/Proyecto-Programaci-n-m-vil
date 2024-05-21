@@ -8,11 +8,11 @@ import java.util.Optional;
 
 public interface IPanelService {
     List<Panel> findAll(); // Devuelve una lista de clientes
-    Optional<Panel> findById(int id); // Devuelve un cliente por su id
+    Optional<Panel> findById(long id); // Devuelve un cliente por su id
     Panel save(Panel panel); // Guarda un libro
-    void update(Panel panel, int id); // Actualiza un libro
+    void update(Panel panel, long id); // Actualiza un libro
 
-    List<Panel> getPanelsByUsuarioId(int usuarioId);
 
-    void delete(int id); // Elimina un cliente
+
+    void delete(long id); // Elimina un cliente
 }

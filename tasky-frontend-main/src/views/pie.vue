@@ -1,7 +1,7 @@
 <template>
   <ion-page>
     <ion-tabs>
-      <div class="background-container"></div>
+      
       <ion-header>
         <ion-toolbar>
           <div style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
@@ -69,6 +69,7 @@ const consultarUsuario = async () => {
     
     if (response.data.length > 0) {
       const usuario = response.data[0];
+
       nombre.value = usuario.nombre;
       apellido.value = usuario.apellido;
       email.value = usuario.email;

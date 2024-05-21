@@ -10,7 +10,7 @@ http://ionicframework.com/docs/theming/ */
   background-repeat: es; /* Adjust as needed (repeat, space-around, etc.) */
   background-size: cover; /* Adjust as needed (contain, auto, etc.) */
   background-position: center; /* Adjust as needed (top, right, bottom-left, etc.) */
-  z-index: -1;
+ 
 }
 .logo-image-g {
   position: relative;

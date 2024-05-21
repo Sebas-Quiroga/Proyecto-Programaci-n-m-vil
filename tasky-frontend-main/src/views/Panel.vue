@@ -1,74 +1,73 @@
 <template>
-  <ion-page @ionViewDidEnter="findAllRecords">
-    <ion-content fullscreen >    
-      <ion-list class="" >
-        <ion-card v-for="(item, index) in items" :key="index" class="card-width">
-          <ion-card-content>
-            <ion-item>
-              <ion-label>Nombre: </ion-label>
-              <ion-label>{{ item.name_of_task }}</ion-label>
-            </ion-item>
-            <ion-item>
-              <ion-label>fecha inicial: </ion-label>
-              <ion-label>{{ item.fecha_ini }}</ion-label>
-            </ion-item>
-            <ion-item>
-              <ion-label>Fecha fin </ion-label>
-              <ion-label>{{ item.fecha_fin }}</ion-label>
-            </ion-item>
-            <ion-item>
-              <ion-label>Realizado: </ion-label>
-              <ion-label>{{ item.evento }}</ion-label>
-            </ion-item>
-           
-          </ion-card-content>
-        </ion-card>
-      </ion-list>
+  
+  <ion-page>
+    <div class="background-container"></div>
+    <ion-content>
+      <ion-card v-for="panel in panels" :key="panel.id" class="custom-rounded">
+        <ion-card-header>
+          <ion-card-title>Panel ID: {{ panel.id }}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <p>Nombre: {{ panel.name }}</p>
+          <p>Fecha de Inicio: {{ panel.ini }}</p>
+          <p>Fecha de Fin: {{ panel.fin }}</p>
+          <p>Evento: {{ panel.evento }}</p>
+          <ion-button @click="changeEventToZero(panel.id)"> <ion-icon name="checkmark-circle" size="large"></ion-icon></ion-button>
+        </ion-card-content>
+      </ion-card>
     </ion-content>
   </ion-page>
 </template>
+<script>
+import { IonPage, IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonButton, IonIcon } from '@ionic/vue';
+import { defineComponent } from 'vue';
 
-<script setup lang="ts">
-import { ref, onMounted } from 'vue';
-import axios from 'axios';
-import * as IonIcons from 'ionicons/icons';
-
-const baseURL = 'http://localhost:9000/Tasky/api/Panel ';
-const items = ref<Array<ItemType>>([]);
-
-// Tipos
-interface ItemType {
-  id: string;
-  iduser: string;
-  name_of_task: string;
-  fecha_ini: string;
-  fecha_fin: string;
-  evento: string;
-}
-
-onMounted(findAllRecords);
-
-async function findAllRecords() {
-  try {
-    const response = await axios.get(baseURL);
-    items.value = response.data;
-    
-  } catch (error) {
-    console.error('Error al obtener todos los registros:', error);
-    alert('Error al obtener todos los registros:')
-
+export default defineComponent({
+  components: {
+    IonPage,
+    IonContent,
+    IonCard,
+    IonCardHeader,
+    IonCardTitle,
+    IonCardContent,
+    IonButton,
+    IonIcon
+  },
+  data() {
+    return {
+      panels: []
+    };
+  },
+  mounted() {
+    this.fetchPanels();
+  },
+  methods: {
+    fetchPanels() {
+      fetch('http://localhost:9000/Tasky/api/Panel/vista')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('No se pudieron obtener los datos de la API.');
+          }
+          return response.json();
+        })
+        .then(data => {
+          // Filtrar los paneles para que solo se incluyan aquellos con evento igual a 0
+          this.panels = data.filter(panel => panel.evento === 0);
+          console.log('Datos de los paneles filtrados:', this.panels);
+        })
+        .catch(error => {
+          console.error(error);
+          alert('Hubo un problema al obtener los datos de la API.');
+        });
+    },
+    changeEventToZero(panelId) {
+      const panel = this.panels.find(p => p.id === panelId);
+      if (panel) {
+        panel.evento = 1;
+        // Aquí puedes realizar una solicitud PUT a la API para actualizar el evento a 0
+        console.log(`Evento del Panel ID ${panelId} cambiado a 1`);
+      }
+    }
   }
-}
-
-const openModalAdd = () => {
-  // Lógica para abrir el modal de agregar
-};
+});
 </script>
-
-<style scoped>
-.add-button {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-}
-</style>
