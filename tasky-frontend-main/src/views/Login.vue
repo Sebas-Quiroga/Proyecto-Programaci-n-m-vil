@@ -8,7 +8,7 @@
         <ImagenComponent id="miImagen" imageUrl="/public/logo.png" altText="imagen" class="logo-image" />
       </div>
 
-      <ion-card class="custom-rounded" >
+      <ion-card class="custom-rounded" color="">
         <div class="segment">
           <ion-segment v-model="selectedOption">
             <ion-segment-button color="light" value="login">

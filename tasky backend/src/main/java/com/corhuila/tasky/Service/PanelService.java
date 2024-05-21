@@ -58,4 +58,9 @@ public class PanelService implements IPanelService {
     public void delete(long id) {
         repository.deleteById(id);
     }
+
+    @Override
+    public List<Panel> getPanelsByUsuarioId(long usuarioId) {
+        return null;
+    }
 }

@@ -2,7 +2,6 @@ package com.corhuila.tasky.Controller;
 
 
 import com.corhuila.tasky.Entity.Panel;
-
 import com.corhuila.tasky.IService.IPanelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +17,7 @@ public class PanelController {
     //Inyectar el servicio
     @Autowired
     private IPanelService service;
+
     @GetMapping("/vista")
     public List<Panel> findAll() {
         return service.findAll();
@@ -29,8 +29,8 @@ public class PanelController {
     }
 
     @PostMapping("/crear")
-    public Panel save(@RequestBody Panel usuario) {
-        return service.save(usuario);
+    public Panel save(@RequestBody Panel panel) {
+        return service.save(panel);
     }
 
 
@@ -43,4 +43,8 @@ public class PanelController {
         service.delete(id);
     }
 
+    @GetMapping("/usuario/{usuarioId}")
+    public List<Panel> getPanelsByUsuarioId(@PathVariable Long usuarioId) {
+        return service.getPanelsByUsuarioId(usuarioId);
+    }
 }
