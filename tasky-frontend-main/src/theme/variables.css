@@ -1,5 +1,8 @@
 /* For information on how to create your own theme, please see:
 http://ionicframework.com/docs/theming/ */
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@700&display=swap');
+
 .background-container {
   position: absolute;
   top: 0;
@@ -19,7 +22,10 @@ http://ionicframework.com/docs/theming/ */
 .custom-button-width {
     width: 300px; /* Adjust the width as needed */
     margin: 0 auto;
+    font-family: 'Nunito', sans-serif; /* Fuente personalizada */
+    font-weight: bold; /* Texto en negrita */
 }
+
 .registro{
     width: 150px; /* Adjust the width as needed */
 }
@@ -53,11 +59,14 @@ http://ionicframework.com/docs/theming/ */
 .custom-rounded {
   border-radius: 3rem; /* Adjust radius as desired */
 }
-.parafo {
+
+.parrafo {
+  
   font-size: 24px; /* Adjust font size as desired */
   font-weight: bold; /* Apply bold style */
-  font-family: Arial, sans-serif; /* Set font family to Arial */
+  font-family: 'Nunito', sans-serif; /* Fuente personalizada */
   text-align: center; /* Center the text */
+  color: white; /* Color de texto blanco */
 }
 .adelante{
   z-index: 1;

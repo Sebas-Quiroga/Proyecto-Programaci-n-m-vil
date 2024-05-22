@@ -1,29 +1,44 @@
 <template>
   <ion-page>
+
     <div class="background-container"></div>
+
     <ion-content>
-      <h2>Agregar | Tareal</h2>
+
       <ion-card class="custom-rounded">
+        <p class="parrafo">Agregar una nota!</p>
         <form @submit.prevent="agregarPanel">
+
           <ion-item>
-            <ion-label>Nombre:</ion-label>
-            <ion-input v-model="panelData.name" type="text" required></ion-input>
+            <ImputComponent class="texto" id="nombre" name="nombre" label="Nombre de la nota: " placeholder="Nota" label-placement="floating"
+              counter="true" v-model="panelData.name">
+            </ImputComponent>
           </ion-item>
+
           <ion-item>
-            <ion-label>Fecha de Inicio:</ion-label>
-            <ion-input v-model="panelData.ini" type="date" required></ion-input>
+            <ImputComponent type="date" id="fecha_inicio" name="fecha_inicio" label="Fecha de inicio: "  label-placement="floating"
+              counter="true" v-model="panelData.ini">
+            </ImputComponent>
           </ion-item>
+
           <ion-item>
-            <ion-label>Fecha de Fin:</ion-label>
-            <ion-input v-model="panelData.fin" type="date" required></ion-input>
+            <ImputComponent type="date" id="fecha_fin" name="fecha_fin" label="Fecha de fin: "  label-placement="floating"
+              counter="true" v-model="panelData.fin">
+            </ImputComponent>
           </ion-item>
+
+
           <ion-input type="hidden" v-model="panelData.usuario_id" :value="this.idUsuario" />
+
           <ButtonComponent id="Crear" value="crear" fill="solid" color="warning" expand="block" size="large"
             class="custom-button-width" @click="guardarPanel">
           </ButtonComponent>
-
         </form>
+        <br>
       </ion-card>
+
+
+
     </ion-content>
   </ion-page>
 </template>
@@ -62,6 +77,7 @@
       this.consultarUsuario();
     },
     methods: {
+
       consultarUsuario() {
         const emailGuardado = localStorage.getItem('emailUsuario');
         axios.get(`http://localhost:9000/Tasky/api/Usuario?email=${emailGuardado}`)
@@ -77,6 +93,8 @@
             console.error(error);
           });
       },
+
+      
       guardarPanel() {
         axios.post('http://localhost:9000/Tasky/api/Tareas/guardar', this.panelData)
           .then(response => {
@@ -99,3 +117,5 @@
     },
   })
   </script>
+
+<style scoped src="../theme/variables.css"></style>

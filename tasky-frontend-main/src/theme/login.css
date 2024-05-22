@@ -30,3 +30,10 @@
   left: 20%; /* Faltando un 20% de la pantalla desde el borde izquierdo */
   width: 60%; /* Ancho del botón */
 }
+
+
+.texto{
+  font-family: 'Nunito', sans-serif; /* Fuente personalizada */
+  font-weight: bold; /* Texto en negrita */
+  font-size: 14px;
+}

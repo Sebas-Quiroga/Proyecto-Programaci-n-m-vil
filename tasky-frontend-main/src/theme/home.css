@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@700&display=swap');
+
+
+.custom-button {
+  border-radius: 110px; /* Bordes redondeados */
+  font-family: 'Nunito', sans-serif; /* Fuente personalizada */
+  font-weight: bold; /* Texto en negrita */
+  --background: var(--ion-color-primary);
+  --color: white; /* Color de texto blanco */
+    width: 300px; /* Adjust the width as needed */
+    margin: 0 auto;
+}
+
+
+.text {
+  font-family: 'Nunito', sans-serif; /* Fuente personalizada */
+  font-weight: bold; /* Texto en negrita */
+  color: #000; /* Color del texto, puedes ajustarlo según tus necesidades */
+}
+
+.sign-up {
+  --color: #005eff; /* Color de texto blanco */
+  font-weight: bold; /* Texto en negrita */
+}
+
+.center-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 84vh; /* Ajusta este valor según tus necesidades */
+}
+
+
+
+
+
+
