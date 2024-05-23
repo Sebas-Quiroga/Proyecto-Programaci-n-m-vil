@@ -6,26 +6,41 @@
     <ion-content>
 
       <ion-card class="custom-rounded">
+
+
         <p class="parrafo">Agregar una nota!</p>
         <form @submit.prevent="agregarPanel">
 
           <ion-item>
-            <ImputComponent class="texto" id="nombre" name="nombre" label="Nombre de la nota: " placeholder="Nota" label-placement="floating"
-              counter="true" v-model="panelData.name">
+            <ImputComponent class="texto" id="titulo" name="titulo" label="Titulo: " placeholder="Describe el contenido de la nota" label-placement="floating"
+              counter="true" v-model="panelData.titulo">
             </ImputComponent>
           </ion-item>
 
           <ion-item>
-            <ImputComponent type="date" id="fecha_inicio" name="fecha_inicio" label="Fecha de inicio: "  label-placement="floating"
-              counter="true" v-model="panelData.ini">
+            <ImputComponent class="texto" id="contenido" name="contenido" label="Descripción: " placeholder="Información que se desea recordar o registrar." label-placement="floating"
+              counter="true" v-model="panelData.contenido">
             </ImputComponent>
           </ion-item>
 
           <ion-item>
-            <ImputComponent type="date" id="fecha_fin" name="fecha_fin" label="Fecha de fin: "  label-placement="floating"
-              counter="true" v-model="panelData.fin">
+            <ImputComponent class="texto" id="categoria" name="categoria" label="Categoria: " placeholder="Categoria de la tarea" label-placement="floating"
+              counter="true" v-model="panelData.categoria">
             </ImputComponent>
           </ion-item>
+
+          <ion-item>
+            <ImputComponent class="texto" id="etiqueta" name="etiqueta" label="Etiqueta " placeholder="Etiqueta de la tarea" label-placement="floating"
+              counter="true" v-model="panelData.etiqueta">
+            </ImputComponent>
+          </ion-item>
+
+          <ion-item>
+            <ImputComponent class="texto" id="prioridad" name="prioridad" label="Prioridad" placeholder="Prioridad de la tarea:" label-placement="floating"
+              counter="true" v-model="panelData.prioridad">
+            </ImputComponent>
+          </ion-item>
+
 
 
           <ion-input type="hidden" v-model="panelData.usuario_id" :value="this.idUsuario" />
@@ -64,9 +79,11 @@
     data() {
       return {
         panelData: {
-          name: '',
-          ini: '',
-          fin: '',
+          titulo: '',
+          contenido: '',
+          categoria: '',
+          prioridad: '',
+          etiqueta: '',
           usuario: {
             id: '',
           },
@@ -100,9 +117,11 @@
           .then(response => {
             console.log('Panel guardado exitosamente:', response.data);
             this.panelData = {
-              name: '',
-              ini: '',
-              fin: '',
+              titulo: '',
+              contenido: '',
+              categoria: '',
+              prioridad: '',
+              etiqueta: '',
               usuario: {
                 id: '',
               },

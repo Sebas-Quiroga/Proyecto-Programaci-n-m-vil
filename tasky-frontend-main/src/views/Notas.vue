@@ -5,14 +5,24 @@
 
         <ion-card-content>
           <ion-item>
-            <ion-text>Nombre: {{ panel.name }}</ion-text>
+            <ion-text>Nombre: {{ panel.titulo }}</ion-text>
           </ion-item>
           <ion-item>
-            <ion-text>Fecha de Inicio: {{ panel.ini }}</ion-text>
+            <ion-text>Fecha de Inicio: {{ panel.contenido }}</ion-text>
           </ion-item>
           <ion-item>
-            <ion-text>Fecha de Fin: {{ panel.fin }}</ion-text>
+            <ion-text>Fecha de Fin: {{ panel.categoria }}</ion-text>
           </ion-item>
+          <ion-item>
+            <ion-text>Fecha de Fin: {{ panel.prioridad }}</ion-text>
+          </ion-item>
+          <ion-item>
+            <ion-text>Fecha de Fin: {{ panel.etiqueta }}</ion-text>
+          </ion-item>
+          
+          
+
+
           <ion-button @click="changeEventToZero(panel.id)" fill="clear">
             <ion-icon name="checkmark-circle" size="large"></ion-icon>
           </ion-button>

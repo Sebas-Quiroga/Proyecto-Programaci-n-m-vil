@@ -44,6 +44,7 @@ public class NotasController {
     public void delete(@PathVariable int id) {
         service.delete(id);
     }
+
     @GetMapping("/vista/notas/{usuarioIde}")
     public List<Tareas> getNotassByUsuarioId(@PathVariable int usuarioIde) {
         return service.getNotassByUsuarioId(usuarioIde);
