@@ -15,14 +15,20 @@ public class Notas {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "titulo")
+    private String titulo;
 
-    @Column(name = "ini")
-    private LocalDate ini;
+    @Column(name = "contenido")
+    private String contenido;
 
-    @Column(name = "fin")
-    private LocalDate fin;
+    @Column(name = "categoria")
+    private String categoria;
+
+    @Column(name = "prioridad")
+    private String prioridad;
+
+    @Column(name = "etiqueta")
+    private String etiqueta;
 
     @Column(name = "evento")
     private byte evento;

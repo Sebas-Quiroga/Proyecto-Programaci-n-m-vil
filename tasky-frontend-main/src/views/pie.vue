@@ -1,7 +1,6 @@
 <template>
   <ion-page>
     <ion-tabs>
-      
       <ion-header>
         <ion-toolbar>
           <div style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
@@ -13,7 +12,7 @@
               </div>
             </div>
             <div style="display: flex; align-items: center;">
-              <ion-button color="light" fill="clear" size="large">
+              <ion-button color="light" fill="clear" size="large" @click="logout">
                 <ion-icon name="power" size="large"></ion-icon>
               </ion-button>
             </div>
@@ -22,23 +21,21 @@
       </ion-header>
       <ion-router-outlet></ion-router-outlet>
       <ion-tab-bar slot="bottom">
-        <ion-tab-button tab="Buscar" href="/Tasky/realizado">
+        <ion-tab-button tab="realizado" href="/Tasky/realizado">
           <ion-icon aria-hidden="true" :icon="triangle" />
-          <ion-button color="light"  size="large">
+          <ion-button color="light" size="large">
             <ion-icon name="checkmark-circle" size="large"></ion-icon>
           </ion-button>
         </ion-tab-button>
-        <ion-tab-button tab="Buscar" href="/Tasky/Tareas">
+        <ion-tab-button tab="tarea" href="/Tasky/Tareas">
           <ion-icon aria-hidden="true" :icon="triangle" />
           <ion-button color="light" size="large">
             <ion-icon name="calendar-number-outline" size="large"></ion-icon>
           </ion-button>
         </ion-tab-button>
-
         <ion-tab-button tab="agregar" href="/Tasky/notas">
           <ion-icon aria-hidden="true" :icon="square" />
-          <ion-button color="light"  size="large">
-            
+          <ion-button color="light" size="large">
             <ion-icon name="file-tray-outline" size="large"></ion-icon>
           </ion-button>
         </ion-tab-button>
@@ -52,15 +49,20 @@ import { ref, onMounted } from 'vue';
 import { IonTabBar, IonTabButton, IonTabs, IonLabel, IonIcon, IonPage, IonRouterOutlet, IonButton } from '@ionic/vue';
 import { ellipse, square, triangle } from 'ionicons/icons';
 import axios from 'axios';
+import { useRouter } from 'vue-router';
 
-const nombre = ref(''); // Asegúrate de que nombre, apellido y email estén disponibles en este ámbito
+const nombre = ref('');
 const apellido = ref('');
 const email = ref('');
 const id = ref('');
 
+const router = useRouter();
+
 const logout = () => {
-  // Lógica para cerrar sesión
-}
+  localStorage.removeItem('emailUsuario'); // Eliminar el email guardado en el localStorage
+  localStorage.removeItem('idUsuario'); // Eliminar el ID del usuario guardado en el localStorage
+  router.push('/login'); // Redirigir a la página de inicio de sesión
+};
 
 const consultarUsuario = async () => {
   const emailGuardado = localStorage.getItem('emailUsuario'); // Obtener el email del usuario guardado
@@ -85,7 +87,7 @@ const consultarUsuario = async () => {
   } catch (error) {
     console.error(error);
   }
-}
+};
 
 // Llamar a la función consultarUsuario cuando el componente se monta
 onMounted(() => {

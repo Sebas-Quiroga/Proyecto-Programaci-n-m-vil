@@ -43,13 +43,12 @@ public class NotasService implements INotasService {
         //Cargar nuevo objeto
         if (!ps.isEmpty()){
             Notas tareasUpdate = ps.get();
+            
             tareasUpdate.setEvento(notas.getEvento());
-
-
             //Actualizar el objeto libro
             repository.save(tareasUpdate);
         }else{
-            System.out.println("No existe el libro");
+            System.out.println("No existe el nota");
         }
     }
 
