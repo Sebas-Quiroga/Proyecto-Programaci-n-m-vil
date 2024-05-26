@@ -10,6 +10,5 @@ import java.util.List;
 
 @Repository
 public interface ITareasRepository extends JpaRepository<Tareas, Long> {
-
     List<Tareas> findByUsuarioId(int usuarioId);
 }

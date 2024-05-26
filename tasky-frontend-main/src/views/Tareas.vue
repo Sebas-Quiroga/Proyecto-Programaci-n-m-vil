@@ -68,7 +68,7 @@ export default defineComponent({
         });
     },
     mostrarPaneles(idUsuario) {
-      axios.get(`http://localhost:9000/Tasky/api/Panel/vista/${idUsuario}`)
+      axios.get(`http://localhost:9000/Tasky/api/Tareas/vista/${idUsuario}`)
         .then(response => {
           this.panels = response.data.filter(panel => panel.evento === 0);
           console.log('Datos de los paneles filtrados:', this.panels);
@@ -79,24 +79,27 @@ export default defineComponent({
         });
     },
     changeEventToZero(panelId) {
-      const panel = this.panels.find(p => p.id === panelId);
-      if (panel) {
-        // Actualizar el evento localmente
+  const panel = this.panels.find(p => p.id === panelId);
+  if (panel) {
+    // Actualizar el evento localmente
+    panel.evento = 0;
+
+    // Realizar la solicitud PUT a la API para actualizar el evento en la base de datos
+    axios.put(`http://localhost:9000/Tasky/api/Tareas/${panelId}`, { evento: 1 })
+      .then(response => {
+        console.log(`Evento del Panel ID ${panelId} actualizado a 0 en la base de datos`);
+        window.location.reload();
+      })
+      .catch(error => {
+        console.error('Error al actualizar el evento en la base de datos:', error);
+        // Revertir el cambio si hay un error
         panel.evento = 1;
-        // Realizar la solicitud PUT a la API para actualizar el evento en la base de datos
-        axios.put(`http://localhost:9000/Tasky/api/Panel/tareas/${panelId}`, { evento: 1 })
-          .then(response => {
-            console.log(`Evento del Panel ID ${panelId} actualizado a 1 en la base de datos`);
-            window.location.reload();
-          })
-          .catch(error => {
-            console.error('Error al actualizar el evento en la base de datos:', error);
-            // Revertir el cambio si hay un error
-            panel.evento = 0;
-            alert('Hubo un problema al actualizar el evento en la base de datos.');
-          });
-      }
-    }
+        alert('Hubo un problema al actualizar el evento en la base de datos.');
+      });
+  } else {
+    console.error(`Panel con ID ${panelId} no encontrado.`);
+  }
+}
   }
 });
 </script>

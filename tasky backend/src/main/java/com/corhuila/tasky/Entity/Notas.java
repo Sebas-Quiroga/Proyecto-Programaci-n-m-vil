@@ -27,7 +27,7 @@ public class Notas {
     @Column(name = "evento")
     private byte evento;
     @ManyToOne
-    @JoinColumn(name = "usuario_ide", referencedColumnName = "id")
+    @JoinColumn(name = "usuario", referencedColumnName = "id")
     private Usuario usuario; // Relación de clave externa con la entidad Usuario
 
 }

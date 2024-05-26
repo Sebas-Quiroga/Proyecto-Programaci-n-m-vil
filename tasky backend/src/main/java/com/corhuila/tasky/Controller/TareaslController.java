@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("api/Panel")
+@RequestMapping("api/Tareas")
 public class TareaslController {
     //Inyectar el servicio
     @Autowired

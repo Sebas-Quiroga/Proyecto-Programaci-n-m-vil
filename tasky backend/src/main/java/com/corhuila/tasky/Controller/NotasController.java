@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("api/Tareas")
+@RequestMapping("api/Notas")
 public class NotasController {
     //Inyectar el servicio
     @Autowired
@@ -26,7 +26,7 @@ public class NotasController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Notas> findById(@PathVariable int id) {
+    public Optional<Notas> findById(@PathVariable long id) {
         return service.findById(id);
     }
 
@@ -37,7 +37,7 @@ public class NotasController {
 
 
     @PutMapping("/{id}")
-    public void update(@RequestBody Notas notas, @PathVariable int id) {
+    public void update(@RequestBody Notas notas, @PathVariable long id) {
         service.update(notas, id);
     }
     @DeleteMapping("/{id}")
@@ -45,7 +45,7 @@ public class NotasController {
         service.delete(id);
     }
     @GetMapping("/vista/notas/{usuarioIde}")
-    public List<Tareas> getNotassByUsuarioId(@PathVariable int usuarioIde) {
-        return service.getNotassByUsuarioId(usuarioIde);
+    public List<Notas> getNotassByUsuarioId(@PathVariable long usuarioIde) {
+        return service.NotassByUsuarioId(usuarioIde);
     }
 }

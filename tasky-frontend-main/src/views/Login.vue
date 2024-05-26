@@ -5,7 +5,7 @@
       <BotonatrasComponent href="/home"> </BotonatrasComponent>
       <div
         style="display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative;">
-        <ImagenComponent id="miImagen" imageUrl="/public/logo.png" altText="imagen" class="logo-image" />
+        <ImagenComponent id="miImagen" imageUrl="/resources/logo_log.png" altText="imagen" class="logo-image" />
       </div>
 
       <ion-card class="custom-rounded" color="">

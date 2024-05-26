@@ -2,7 +2,6 @@ package com.corhuila.tasky.Service;
 
 
 import com.corhuila.tasky.Entity.Notas;
-import com.corhuila.tasky.Entity.Tareas;
 import com.corhuila.tasky.IRepository.INotasRepository;
 import com.corhuila.tasky.IService.INotasService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +25,7 @@ public class NotasService implements INotasService {
     }
 
     @Override
-    public Optional<Notas> findById(int id) {
+    public Optional<Notas> findById(long id) {
         return repository.findById(id);
     }
 
@@ -36,7 +35,7 @@ public class NotasService implements INotasService {
     }
 
     @Override
-    public void update(Notas notas, int id) {
+    public void update(Notas notas, long id) {
         //Obtener el objeto libro y el id
         //Verificar con el id, si exiten los datos
         Optional<Notas> ps = repository.findById(id);
@@ -55,12 +54,12 @@ public class NotasService implements INotasService {
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(long id) {
         repository.deleteById(id);
     }
 
     @Override
-    public List<Tareas> getNotassByUsuarioId(int usuarioIde) {
-        return repository.findByUsuarioId(usuarioIde);
+    public List<Notas> NotassByUsuarioId(long usuarioId) {
+        return repository.findByUsuarioId(usuarioId);
     }
 }

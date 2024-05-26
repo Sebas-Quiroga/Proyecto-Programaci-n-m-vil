@@ -68,7 +68,7 @@ export default defineComponent({
         });
     },
     mostrarPaneles(idUsuario) {
-      axios.get(`http://localhost:9000/Tasky/api/Tareas/vista`)
+      axios.get(`http://localhost:9000/Tasky/api/Notas/vista`)
         .then(response => {
           this.panels = response.data.filter(panel => panel.evento === 0);
           console.log('Datos de los paneles filtrados:', this.panels);
@@ -84,7 +84,7 @@ export default defineComponent({
         // Actualizar el evento localmente
         panel.evento = 1;
         // Realizar la solicitud PUT a la API para actualizar el evento en la base de datos
-        axios.put(`http://localhost:9000/Tasky/api/Panel/tareas/${panelId}`, { evento: 1 })
+        axios.put(`http://localhost:9000/Tasky/api/Notas//${panelId}`, { evento: 1 })
           .then(response => {
             console.log(`Evento del Panel ID ${panelId} actualizado a 1 en la base de datos`);
             window.location.reload();

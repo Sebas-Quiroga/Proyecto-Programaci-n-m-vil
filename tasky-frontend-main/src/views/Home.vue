@@ -6,7 +6,7 @@
       <ion-header collapse="condense" style="display: flex; justify-content: center; align-items: center;"></ion-header>
       <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative;">
        
-           <ImagenComponent id="logo" imageUrl="/public/logo.png" altText="imagen" class="logo-image-g" />  
+           <ImagenComponent id="logo" imageUrl="/resources/logo.png" altText="imagen" class="logo-image-g" />  
       </div>
       <div class="custom-button-width">
         <ButtonComponent id="login" value="login" fill="solid" color="medium" expand="block" size="large" href="/login"></ButtonComponent>
@@ -26,4 +26,5 @@ import ImagenComponent from '@/components/ImagenComponent.vue';
 
 
 </script>
+
 
