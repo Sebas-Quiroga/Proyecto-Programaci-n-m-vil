@@ -15,26 +15,9 @@ public class Rol {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
+	@Column(name = "nombre", unique = true)
 	private String nombre;
 
-
-
-	public Rol(Long id, String nombre) {
-		super();
-		this.id = id;
-		this.nombre = nombre;
-	}
-
-	public Rol() {
-
-	}
-
-	public Rol(String nombre) {
-		super();
-		this.nombre = nombre;
-	}
-	@ManyToMany(mappedBy = "roles")
-	private Set<Usuario> usuarios = new HashSet<>();
-	// Métodos para manejar la relación entre roles y usuarios
 	
 }

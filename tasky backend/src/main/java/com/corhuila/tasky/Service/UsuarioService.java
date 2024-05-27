@@ -32,6 +32,9 @@ public class  UsuarioService implements IUsuarioService {
 
     @Override
     public Usuario save(Usuario usuario) {
+        if (repository.existsByEmail(usuario.getEmail())) {
+            throw new IllegalArgumentException("El email ya existe.");
+        }
         return repository.save(usuario);
     }
 
