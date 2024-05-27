@@ -2,6 +2,9 @@ import { createRouter, createWebHistory } from '@ionic/vue-router';
 import { RouteRecordRaw } from 'vue-router';
 import TabsPage from '../views/pie.vue';
 import HomePage from '../views/Home.vue';
+import BUsuarios from '../views/BUsuarios.vue';
+import BTareas from '../views/BTareas.vue';
+import BNotas from '../views/BNotas.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -13,6 +16,24 @@ const routes: Array<RouteRecordRaw> = [
     path: '/home',
     name: 'Home',
     component: HomePage
+  },
+  {
+    
+    path: '/busuarios',
+    name: 'BUsuarios',
+    component: BUsuarios
+  },
+  {
+    
+    path: '/btareas',
+    name: 'BTareas',
+    component: BTareas
+  },
+  {
+    
+    path: '/bnotas',
+    name: 'BNotas',
+    component: BNotas
   },
   {
     path: '/login',

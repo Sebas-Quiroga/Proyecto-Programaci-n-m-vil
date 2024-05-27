@@ -7,7 +7,7 @@
         <form @submit.prevent="agregarPanel">
 
           <ion-item>
-            <ImputComponent class="texto" id="nombre" name="nombre" label="Nombre de la tarea: " placeholder="Nota" label-placement="floating"
+            <ImputComponent class="texto" id="nombre" name="nombre" label="Nombre de la tarea: " placeholder="Tarea" label-placement="floating"
               counter="true" v-model="panelData.name">
             </ImputComponent>
           </ion-item>

@@ -19,6 +19,8 @@
           </div>
         </ion-toolbar>
       </ion-header>
+
+      
       <ion-router-outlet></ion-router-outlet>
       <ion-tab-bar slot="bottom">
         <ion-tab-button tab="realizado" href="/Tasky/realizado">

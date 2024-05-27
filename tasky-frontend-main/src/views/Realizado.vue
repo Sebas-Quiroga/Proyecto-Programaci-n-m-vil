@@ -22,7 +22,7 @@
               <ion-text>Etiqueta: {{ nota.etiqueta }}</ion-text>
             </ion-item>
             <ion-button @click="changeEventToZeron(nota.id)" fill="clear">
-              <ion-icon name="checkmark-circle" size="large"></ion-icon>
+              <ion-icon name="checkmark-circle-sharp" size="large"></ion-icon>
             </ion-button>
           </ion-card-content>
         </ion-card>
@@ -40,8 +40,8 @@
             <ion-item>
               <ion-text>Fecha de Fin: {{ panel.fin }}</ion-text>
             </ion-item>
-            <ion-button @click="changeEventToZerot(panel.id)" fill="clear">
-              <ion-icon name="checkmark-circle" size="large"></ion-icon>
+            <ion-button color="danger" @click="changeEventToZerot(panel.id)" fill="clear">
+              <ion-icon name="close-circle-sharp" size="large"></ion-icon>
             </ion-button>
           </ion-card-content>
         </ion-card>
