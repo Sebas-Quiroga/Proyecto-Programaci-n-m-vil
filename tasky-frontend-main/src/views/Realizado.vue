@@ -57,7 +57,7 @@ import { IonPage, IonContent, IonCard, IonCardContent, IonItem, IonText, IonButt
 import { defineComponent } from 'vue';
 import axios from 'axios';
 
-const baseURL = "http://192.168.193.209:9000/Tasky/api";
+const baseURL = "https://x71f6bvf-9000.use2.devtunnels.ms/Tasky/api";
 
 export default defineComponent({
   components: {

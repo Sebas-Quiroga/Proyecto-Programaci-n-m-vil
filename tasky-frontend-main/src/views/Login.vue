@@ -110,7 +110,7 @@ import BotonatrasComponent from '@/components/BotonatrasComponent.vue';
 import axios from 'axios';
 import { ref } from 'vue';
 
-const baseURL = "http://192.168.193.209:9000/Tasky/api";
+const baseURL = "https://x71f6bvf-9000.use2.devtunnels.ms/Tasky/api";
 
 const selectedOption = ref('login');
 const nombre = ref('');

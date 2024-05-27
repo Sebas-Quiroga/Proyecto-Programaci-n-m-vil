@@ -102,7 +102,7 @@ import * as IonIcons from 'ionicons/icons';
 import axios from 'axios';
 
 // Rutas de la API
-const baseURL = 'http://localhost:9000/Tasky/api/Notas/vista';
+const baseURL = 'https://x71f6bvf-9000.use2.devtunnels.ms/Tasky/api/Notas/vista';
 const modalIsOpen = ref(false);
 const items = ref<Array<ItemType>>([]);
 

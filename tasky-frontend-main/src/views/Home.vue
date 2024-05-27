@@ -35,7 +35,9 @@ import ButtonComponent from '@/components/ButtonComponent.vue';
 import ImagenComponent from '@/components/ImagenComponent.vue';
 
 const apiStatus = ref<string>('Checking API status...');
-  const baseURL = "http://192.168.193.209:9000/Tasky/api";
+
+
+  const baseURL = "https://x71f6bvf-9000.use2.devtunnels.ms/Tasky/api";
 const checkApiStatus = async () => {
   try {
     const response = await axios.get(baseURL+'/Usuario');

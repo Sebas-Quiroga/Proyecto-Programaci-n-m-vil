@@ -53,7 +53,7 @@ import { ellipse, square, triangle } from 'ionicons/icons';
 import axios from 'axios';
 import { useRouter } from 'vue-router';
 
-const baseURL = "http://192.168.193.209:9000/Tasky/api";
+const baseURL = "https://x71f6bvf-9000.use2.devtunnels.ms/Tasky/api";
 
 const nombre = ref('');
 const apellido = ref('');
