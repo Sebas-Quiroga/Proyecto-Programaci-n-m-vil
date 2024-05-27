@@ -13,6 +13,7 @@
             <ion-item>
               <ion-text>Fecha de Fin: {{ panel.fin }}</ion-text>
             </ion-item>
+<<<<<<< HEAD
             <ion-button @click="changeEventToZero(panel.id)" fill="clear">
               <ion-icon name="checkmark-circle" size="large"></ion-icon>
             </ion-button>
@@ -20,6 +21,15 @@
               <ion-icon name="create-outline" size="large"></ion-icon>
             </ion-button>
             <ion-button @click="deletePanel(panel.id)"fill="clear">
+=======
+            <ion-button color="success" @click="changeEventToZero(panel.id)" fill="clear">
+              <ion-icon name="checkmark-circle" size="large"></ion-icon>
+            </ion-button>
+            <ion-button color="warning" @click="editPanel(panel.id)"fill="clear">
+              <ion-icon name="create-outline" size="large"></ion-icon>
+            </ion-button>
+            <ion-button color="danger" @click="deletePanel(panel.id)"fill="clear">
+>>>>>>> 3cb7da5 (Agregacion vistas bases de datos)
               <ion-icon name="trash" size="large"></ion-icon>
             </ion-button>
           </ion-card-content>

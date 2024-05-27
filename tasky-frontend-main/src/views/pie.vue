@@ -19,6 +19,11 @@
           </div>
         </ion-toolbar>
       </ion-header>
+<<<<<<< HEAD
+=======
+
+      
+>>>>>>> 3cb7da5 (Agregacion vistas bases de datos)
       <ion-router-outlet></ion-router-outlet>
       <ion-tab-bar slot="bottom">
         <ion-tab-button tab="realizado" href="/Tasky/realizado">

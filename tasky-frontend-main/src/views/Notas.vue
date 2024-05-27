@@ -19,6 +19,7 @@
             <ion-item>
               <ion-text>Etiqueta: {{ nota.etiqueta }}</ion-text>
             </ion-item>
+<<<<<<< HEAD
             <ion-button @click="changeEventToZero(nota.id)" fill="clear">
               <ion-icon name="checkmark-circle" size="large"></ion-icon>
             </ion-button>
@@ -28,6 +29,17 @@
             <ion-button @click="deleteNota(nota.id)"fill="clear">
               <ion-icon name="trash" size="large"></ion-icon>
             </ion-button>
+=======
+  
+            <ion-button color="warning" @click="editNota(nota.id)" fill="clear">
+              <ion-icon name="create-outline" size="large"></ion-icon>
+            </ion-button>
+
+            <ion-button color="danger" @click="deleteNota(nota.id)" fill="clear">
+              <ion-icon name="trash" size="large"></ion-icon>
+            </ion-button>
+            
+>>>>>>> 3cb7da5 (Agregacion vistas bases de datos)
           </ion-card-content>
         </ion-card>
 
@@ -70,6 +82,10 @@
     </ion-content>
   </ion-page>
 </template>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3cb7da5 (Agregacion vistas bases de datos)
 <script>
 import {
   IonPage, IonContent, IonCard, IonCardContent, IonItem, IonText, IonButton, IonIcon, IonModal, IonLabel, IonInput
@@ -121,6 +137,7 @@ export default defineComponent({
         });
     },
     changeEventToZero(NotaId) {
+<<<<<<< HEAD
   const nota = this.notas.find(p => p.id === NotaId);
   if (nota) {
     nota.evento = 0;
@@ -138,6 +155,25 @@ export default defineComponent({
     console.error(`Panel con ID ${NotaId} no encontrado.`);
   }
 },
+=======
+      const nota = this.notas.find(p => p.id === NotaId);
+      if (nota) {
+        nota.evento = 0;
+        axios.put(`http://localhost:9000/Tasky/api/Notas/${NotaId}`, { evento: 1 })
+          .then(response => {
+            console.log(`Evento del Panel ID ${NotaId} actualizado a 0 en la base de datos`);
+            window.location.reload();
+          })
+          .catch(error => {
+            console.error('Error al actualizar el evento en la base de datos:', error);
+            nota.evento = 1;
+            alert('Hubo un problema al actualizar el evento en la base de datos.');
+          });
+      } else {
+        console.error(`Panel con ID ${NotaId} no encontrado.`);
+      }
+    },
+>>>>>>> 3cb7da5 (Agregacion vistas bases de datos)
     openModalAdd() {
       this.notaForm = { id: '', titulo: '', contenido: '', categoria: '', prioridad: '', etiqueta: '', usuario: { id: this.notaForm.usuario.id } };
       this.modalIsOpen = true;

@@ -7,7 +7,11 @@
         <form @submit.prevent="agregarPanel">
 
           <ion-item>
+<<<<<<< HEAD
             <ImputComponent class="texto" id="nombre" name="nombre" label="Nombre de la tarea: " placeholder="Nota" label-placement="floating"
+=======
+            <ImputComponent class="texto" id="nombre" name="nombre" label="Nombre de la tarea: " placeholder="Tarea" label-placement="floating"
+>>>>>>> 3cb7da5 (Agregacion vistas bases de datos)
               counter="true" v-model="panelData.name">
             </ImputComponent>
           </ion-item>
