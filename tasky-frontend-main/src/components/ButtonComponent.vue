@@ -33,4 +33,8 @@ export default defineComponent({
 
 <style scoped>
 /* Estilo global */
+<<<<<<< HEAD
 </style>
+=======
+</style>
+>>>>>>> 3cb7da5 (Agregacion vistas bases de datos)
