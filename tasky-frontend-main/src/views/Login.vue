@@ -110,11 +110,6 @@ import BotonatrasComponent from '@/components/BotonatrasComponent.vue';
 import axios from 'axios';
 import { ref } from 'vue';
 
-<<<<<<< HEAD
-=======
-const baseURL = "http://192.168.193.209:9000/Tasky/api";
-
->>>>>>> 414a6d9a4a332d0c5aaf5505d5a3fa06ca80e970
 const selectedOption = ref('login');
 const nombre = ref('');
 const apellido = ref('');
@@ -123,11 +118,7 @@ const password = ref('');
 
 const validarCredenciales = async () => {
   try {
-<<<<<<< HEAD
     const response = await axios.get(`http://localhost:9000/Tasky/api/Usuario/validar/${email.value}/${password.value}`);
-=======
-    const response = await axios.get(baseURL+`/Usuario/validar/${email.value}/${password.value}`);
->>>>>>> 414a6d9a4a332d0c5aaf5505d5a3fa06ca80e970
 
     if (response.data) {
       window.location.href = '/Tasky/Tareas';
@@ -142,7 +133,7 @@ const validarCredenciales = async () => {
 
 const Registrar = async () => {
   try {
-    const response = await axios.post(baseURL+'/Usuario/registro', {
+    const response = await axios.post('http://localhost:9000/Tasky/api/Usuario/registro', {
       nombre: nombre.value,
       apellido: apellido.value,
       email: email.value,
