@@ -2,12 +2,9 @@ import { createRouter, createWebHistory } from '@ionic/vue-router';
 import { RouteRecordRaw } from 'vue-router';
 import TabsPage from '../views/pie.vue';
 import HomePage from '../views/Home.vue';
-<<<<<<< HEAD
-=======
 import BUsuarios from '../views/BUsuarios.vue';
 import BTareas from '../views/BTareas.vue';
 import BNotas from '../views/BNotas.vue';
->>>>>>> 3cb7da5 (Agregacion vistas bases de datos)
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -21,8 +18,6 @@ const routes: Array<RouteRecordRaw> = [
     component: HomePage
   },
   {
-<<<<<<< HEAD
-=======
     
     path: '/busuarios',
     name: 'BUsuarios',
@@ -41,7 +36,6 @@ const routes: Array<RouteRecordRaw> = [
     component: BNotas
   },
   {
->>>>>>> 3cb7da5 (Agregacion vistas bases de datos)
     path: '/login',
     component: () => import('../views/Login.vue')
   },
