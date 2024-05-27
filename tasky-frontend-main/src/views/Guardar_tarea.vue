@@ -46,6 +46,11 @@
   import { defineComponent, ref } from 'vue';
   import axios from 'axios';
   
+<<<<<<< HEAD
+=======
+  const baseURL = "http://192.168.193.209:9000/Tasky/api";
+
+>>>>>>> 414a6d9a4a332d0c5aaf5505d5a3fa06ca80e970
   export default defineComponent({
     components: {
       IonPage,
@@ -75,7 +80,11 @@
     methods: {
       consultarUsuario() {
         const emailGuardado = localStorage.getItem('emailUsuario');
+<<<<<<< HEAD
         axios.get(`http://localhost:9000/Tasky/api/Usuario?email=${emailGuardado}`)
+=======
+        axios.get(baseURL+`/Usuario?email=${emailGuardado}`)
+>>>>>>> 414a6d9a4a332d0c5aaf5505d5a3fa06ca80e970
           .then(response => {
             if (response.data.length > 0) {
               const usuario = response.data[0];
@@ -89,7 +98,11 @@
           });
       },
       guardarPanel() {
+<<<<<<< HEAD
         axios.post('http://localhost:9000/Tasky/api/Tareas/crear', this.panelData)
+=======
+        axios.post(baseURL+'/Tareas/crear', this.panelData)
+>>>>>>> 414a6d9a4a332d0c5aaf5505d5a3fa06ca80e970
           .then(response => {
             console.log('Panel guardado exitosamente:', response.data);
             this.panelData = {
