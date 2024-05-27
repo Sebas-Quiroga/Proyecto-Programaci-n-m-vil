@@ -77,6 +77,8 @@ import {
 import { defineComponent } from 'vue';
 import axios from 'axios';
 
+const baseURL = "http://192.168.193.209:9000/Tasky/api";
+
 export default defineComponent({
   components: {
     IonPage, IonContent, IonCard, IonCardContent, IonItem, IonText, IonButton, IonIcon, IonModal, IonLabel, IonInput
@@ -94,7 +96,7 @@ export default defineComponent({
   methods: {
     consultarUsuario() {
       const emailGuardado = localStorage.getItem('emailUsuario');
-      axios.get(`http://localhost:9000/Tasky/api/Usuario?email=${emailGuardado}`)
+      axios.get(baseURL+`/Usuario?email=${emailGuardado}`)
         .then(response => {
           if (response.data.length > 0) {
             const usuario = response.data[0];
@@ -110,7 +112,7 @@ export default defineComponent({
         });
     },
     mostrarNotas(idUsuario) {
-      axios.get(`http://localhost:9000/Tasky/api/Notas/vista/notas/${idUsuario}`)
+      axios.get(baseURL+`/Notas/vista/notas/${idUsuario}`)
         .then(response => {
           this.notas = response.data.filter(notas => notas.evento === 0);
           console.log('Datos de las notas:', this.notas);
@@ -124,7 +126,7 @@ export default defineComponent({
   const nota = this.notas.find(p => p.id === NotaId);
   if (nota) {
     nota.evento = 0;
-    axios.put(`http://localhost:9000/Tasky/api/Notas/${NotaId}`, { evento: 1 })
+    axios.put(baseURL+`/Notas/${NotaId}`, { evento: 1 })
       .then(response => {
         console.log(`Evento del Panel ID ${NotaId} actualizado a 0 en la base de datos`);
         window.location.reload();
@@ -157,7 +159,7 @@ export default defineComponent({
       }
     },
     updateNota() {
-      axios.put(`http://localhost:9000/Tasky/api/Notas/${this.notaForm.id}`, this.notaForm)
+      axios.put(baseURL+`/Notas/${this.notaForm.id}`, this.notaForm)
         .then(() => {
           const index = this.notas.findIndex(n => n.id === this.notaForm.id);
           if (index !== -1) {
@@ -170,7 +172,7 @@ export default defineComponent({
         });
     },
     deleteNota(notaId) {
-      axios.delete(`http://localhost:9000/Tasky/api/Notas/${notaId}`)
+      axios.delete(baseURL+`/Notas/${notaId}`)
         .then(() => {
           this.notas = this.notas.filter(n => n.id !== notaId); // Eliminar la nota localmente
         })
