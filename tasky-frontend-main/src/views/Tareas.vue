@@ -64,11 +64,8 @@ import {
 import { defineComponent } from 'vue';
 import axios from 'axios';
 
-<<<<<<< HEAD
-=======
 const baseURL = "http://192.168.193.209:9000/Tasky/api";
 
->>>>>>> 414a6d9a4a332d0c5aaf5505d5a3fa06ca80e970
 export default defineComponent({
   components: {
     IonPage, IonContent, IonCard, IonCardContent, IonItem, IonText, IonButton, IonIcon, IonModal, IonLabel, IonInput
@@ -86,11 +83,7 @@ export default defineComponent({
   methods: {
     consultarUsuario() {
       const emailGuardado = localStorage.getItem('emailUsuario');
-<<<<<<< HEAD
-      axios.get(`http://localhost:9000/Tasky/api/Usuario?email=${emailGuardado}`)
-=======
       axios.get(baseURL+`/Usuario?email=${emailGuardado}`)
->>>>>>> 414a6d9a4a332d0c5aaf5505d5a3fa06ca80e970
         .then(response => {
           if (response.data.length > 0) {
             const usuario = response.data[0];
@@ -105,11 +98,7 @@ export default defineComponent({
         });
     },
     mostrarPaneles(idUsuario) {
-<<<<<<< HEAD
-      axios.get(`http://localhost:9000/Tasky/api/Tareas/vista/${idUsuario}`)
-=======
       axios.get(baseURL+`/Tareas/vista/${idUsuario}`)
->>>>>>> 414a6d9a4a332d0c5aaf5505d5a3fa06ca80e970
         .then(response => {
           this.panels = response.data.filter(panel => panel.evento === 0);
           console.log('Datos de los paneles filtrados:', this.panels);
@@ -123,11 +112,7 @@ export default defineComponent({
   const panel = this.panels.find(p => p.id === panelId);
   if (panel) {
     panel.evento = 0;
-<<<<<<< HEAD
-    axios.put(`http://localhost:9000/Tasky/api/Tareas/${panelId}`, { evento: 1 })
-=======
     axios.put(baseURL+`/Tareas/${panelId}`, { evento: 1 })
->>>>>>> 414a6d9a4a332d0c5aaf5505d5a3fa06ca80e970
       .then(response => {
         console.log(`Evento del Panel ID ${panelId} actualizado a 0 en la base de datos`);
         window.location.reload();
@@ -165,20 +150,12 @@ export default defineComponent({
     },
     createPanel() {
       const emailGuardado = localStorage.getItem('emailUsuario');
-<<<<<<< HEAD
-      axios.get(`http://localhost:9000/Tasky/api/Usuario?email=${emailGuardado}`)
-=======
       axios.get(baseURL+`/Usuario?email=${emailGuardado}`)
->>>>>>> 414a6d9a4a332d0c5aaf5505d5a3fa06ca80e970
         .then(response => {
           if (response.data.length > 0) {
             const usuario = response.data[0];
             const idUsuario = usuario.id;
-<<<<<<< HEAD
-            axios.post(`http://localhost:9000/Tasky/api/Tareas`, { ...this.panelForm, userId: idUsuario })
-=======
             axios.post(baseURL+`/Tareas`, { ...this.panelForm, userId: idUsuario })
->>>>>>> 414a6d9a4a332d0c5aaf5505d5a3fa06ca80e970
               .then(() => {
                 this.mostrarPaneles(idUsuario);
                 this.modalIsOpen = false;
@@ -195,11 +172,7 @@ export default defineComponent({
         });
     },
     updatePanel() {
-<<<<<<< HEAD
-      axios.put(`http://localhost:9000/Tasky/api/Tareas/${this.panelForm.id}`, this.panelForm)
-=======
       axios.put(baseURL+`/Tareas/${this.panelForm.id}`, this.panelForm)
->>>>>>> 414a6d9a4a332d0c5aaf5505d5a3fa06ca80e970
         .then(() => {
           const index = this.panels.findIndex(p => p.id === this.panelForm.id);
           if (index !== -1) {
@@ -212,11 +185,7 @@ export default defineComponent({
         });
     },
     deletePanel(panelId) {
-<<<<<<< HEAD
-      axios.delete(`http://localhost:9000/Tasky/api/Tareas/${panelId}`)
-=======
       axios.delete(baseURL+`/Tareas/${panelId}`)
->>>>>>> 414a6d9a4a332d0c5aaf5505d5a3fa06ca80e970
         .then(() => {
           this.panels = this.panels.filter(p => p.id !== panelId); // Eliminar el panel localmente
         })

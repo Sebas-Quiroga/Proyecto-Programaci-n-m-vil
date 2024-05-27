@@ -53,11 +53,8 @@ import { ellipse, square, triangle } from 'ionicons/icons';
 import axios from 'axios';
 import { useRouter } from 'vue-router';
 
-<<<<<<< HEAD
-=======
 const baseURL = "http://192.168.193.209:9000/Tasky/api";
 
->>>>>>> 414a6d9a4a332d0c5aaf5505d5a3fa06ca80e970
 const nombre = ref('');
 const apellido = ref('');
 const email = ref('');
@@ -75,11 +72,7 @@ const consultarUsuario = async () => {
   const emailGuardado = localStorage.getItem('emailUsuario'); // Obtener el email del usuario guardado
 
   try {
-<<<<<<< HEAD
-    const response = await axios.get(`http://localhost:9000/Tasky/api/Usuario?email=${emailGuardado}`);
-=======
     const response = await axios.get(baseURL+`/Usuario?email=${emailGuardado}`);
->>>>>>> 414a6d9a4a332d0c5aaf5505d5a3fa06ca80e970
     
     if (response.data.length > 0) {
       const usuario = response.data[0];

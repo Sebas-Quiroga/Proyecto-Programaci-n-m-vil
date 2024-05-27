@@ -142,11 +142,7 @@ const validarCredenciales = async () => {
 
 const Registrar = async () => {
   try {
-<<<<<<< HEAD
-    const response = await axios.post('http://localhost:9000/Tasky/api/Usuario/registro', {
-=======
     const response = await axios.post(baseURL+'/Usuario/registro', {
->>>>>>> 414a6d9a4a332d0c5aaf5505d5a3fa06ca80e970
       nombre: nombre.value,
       apellido: apellido.value,
       email: email.value,

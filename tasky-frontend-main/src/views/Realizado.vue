@@ -57,11 +57,8 @@ import { IonPage, IonContent, IonCard, IonCardContent, IonItem, IonText, IonButt
 import { defineComponent } from 'vue';
 import axios from 'axios';
 
-<<<<<<< HEAD
-=======
 const baseURL = "http://192.168.193.209:9000/Tasky/api";
 
->>>>>>> 414a6d9a4a332d0c5aaf5505d5a3fa06ca80e970
 export default defineComponent({
   components: {
     IonPage, IonContent, IonCard, IonCardContent, IonItem, IonText, IonButton, IonIcon, IonModal, IonLabel, IonInput
@@ -81,11 +78,7 @@ export default defineComponent({
   methods: {
     consultarUsuario() {
       const emailGuardado = localStorage.getItem('emailUsuario');
-<<<<<<< HEAD
-      axios.get(`http://localhost:9000/Tasky/api/Usuario?email=${emailGuardado}`)
-=======
       axios.get(baseURL+`/Usuario?email=${emailGuardado}`)
->>>>>>> 414a6d9a4a332d0c5aaf5505d5a3fa06ca80e970
         .then(response => {
           if (response.data.length > 0) {
             const usuario = response.data[0];
@@ -102,11 +95,7 @@ export default defineComponent({
         });
     },
     mostrarNotas(idUsuario) {
-<<<<<<< HEAD
-      axios.get(`http://localhost:9000/Tasky/api/Notas/vista/notas/${idUsuario}`)
-=======
       axios.get(baseURL+`/Notas/vista/notas/${idUsuario}`)
->>>>>>> 414a6d9a4a332d0c5aaf5505d5a3fa06ca80e970
         .then(response => {
           this.notas = response.data.filter(notas => notas.evento === 1);
           console.log('Datos de las notas:', this.notas);
@@ -117,11 +106,7 @@ export default defineComponent({
         });
     },
     mostrarPaneles(idUsuario) {
-<<<<<<< HEAD
-      axios.get(`http://localhost:9000/Tasky/api/Tareas/vista/${idUsuario}`)
-=======
       axios.get(baseURL+`/Tareas/vista/${idUsuario}`)
->>>>>>> 414a6d9a4a332d0c5aaf5505d5a3fa06ca80e970
         .then(response => {
           this.panels = response.data.filter(panel => panel.evento === 1);
           console.log('Datos de los paneles filtrados:', this.panels);
@@ -135,11 +120,7 @@ export default defineComponent({
       const panel = this.panels.find(p => p.id === panelId);
       if (panel) {
         panel.evento = 1;
-<<<<<<< HEAD
-        axios.put(`http://localhost:9000/Tasky/api/Tareas/${panelId}`, { evento: 0 })
-=======
         axios.put(baseURL+`/Tareas/${panelId}`, { evento: 0 })
->>>>>>> 414a6d9a4a332d0c5aaf5505d5a3fa06ca80e970
           .then(response => {
             console.log(`Evento del Panel ID ${panelId} actualizado a 0 en la base de datos`);
             window.location.reload();
@@ -157,11 +138,7 @@ export default defineComponent({
   const nota = this.notas.find(p => p.id === NotaId);
   if (nota) {
     nota.evento = 1;
-<<<<<<< HEAD
-    axios.put(`http://localhost:9000/Tasky/api/Notas/${NotaId}`, { evento: 0 })
-=======
     axios.put(baseURL+`/Notas/${NotaId}`, { evento: 0 })
->>>>>>> 414a6d9a4a332d0c5aaf5505d5a3fa06ca80e970
       .then(response => {
         console.log(`Evento del Panel ID ${NotaId} actualizado a 0 en la base de datos`);
         window.location.reload();
